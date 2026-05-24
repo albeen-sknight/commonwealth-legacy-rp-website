@@ -38,6 +38,7 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   background-color: var(--bg);
+  overflow-x: hidden;
 }
 
 body {
@@ -611,6 +612,8 @@ a {
   overscroll-behavior-inline: contain;
   padding-bottom: 1rem;
   scroll-snap-type: x proximity;
+  width: 100%;
+  max-width: 100%;
 }
 
 .life-card {
@@ -620,6 +623,17 @@ a {
   flex-direction: column;
   justify-content: flex-end;
   scroll-snap-align: start;
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.life-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--cyan);
+  box-shadow: var(--glow-cyan);
 }
 
 .justice-chapter::before {
@@ -3972,10 +3986,11 @@ body.menu-open {
 
 /* 3. Cinematic Hero Title Reveal Layout & Scroll Sequence */
 #enter {
-  height: 450vh; /* Scroll distance */
+  height: 240vh; /* Shorter scroll distance */
   position: relative;
   scroll-margin-top: 0;
   display: block; /* Don't use grid from .story-chapter */
+  overflow: hidden; /* Prevent scaled/transformed elements from causing horizontal overflow */
 }
 
 #enter::before {
@@ -4029,6 +4044,46 @@ body.menu-open {
   transition: opacity 0.1s linear, transform 0.1s linear;
   text-align: center;
   padding: 2rem;
+}
+
+/* Reveal Pass-Through Stage & Text Tunnel Styles */
+.reveal-pass-through-stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+  transition: opacity 0.1s linear;
+  transform: none !important; /* Keep center-focused, no generic translateY */
+}
+
+.reveal-pass-through-stage.stage-active {
+  pointer-events: auto;
+}
+
+.reveal-text-tunnel {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.reveal-text-logo {
+  max-width: 90vw;
+  width: 1200px;
+  height: auto;
+  object-fit: contain;
+  transform-origin: center center;
+  will-change: transform, opacity;
+  transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+  filter: drop-shadow(0 0 35px rgba(0, 229, 255, 0.15));
 }
 
 /* Enable clicks/hovers only when a stage is active */
@@ -4986,9 +5041,16 @@ body.modal-open {
 
 .frame-scroll-section {
   position: relative;
-  height: 400vh;
+  height: 240vh; /* Shorter scroll height */
+  margin-top: -12vh; /* Seamless transition overlap on desktop */
   background-color: #06080b;
   overflow: visible;
+  display: block !important; /* Override grid layout from .story-chapter */
+  z-index: 2;
+}
+
+.frame-scroll-section::before {
+  display: none !important; /* Disable default story-chapter overlay */
 }
 
 .frame-scroll-sticky {
@@ -4996,29 +5058,35 @@ body.modal-open {
   top: 0;
   height: 100vh;
   width: 100%;
+  max-width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 10%;
+  justify-content: center;
   overflow: hidden;
   box-sizing: border-box;
+  z-index: 2;
 }
 
 .frame-scroll-bg {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 75% 50%, rgba(0, 229, 255, 0.08) 0%, transparent 60%);
-  z-index: 1;
+  inset: 0;
+  /* Premium radial and linear gradients for deep cinematic vignette */
+  background: radial-gradient(circle, rgba(10, 13, 17, 0.2) 0%, rgba(10, 13, 17, 0.85) 90%),
+              linear-gradient(to top, rgba(10, 13, 17, 0.95) 0%, transparent 35%),
+              linear-gradient(to bottom, rgba(10, 13, 17, 0.95) 0%, transparent 35%);
+  z-index: 2;
   pointer-events: none;
 }
 
 .frame-copy {
   position: relative;
   z-index: 5;
-  max-width: 450px;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0 2rem;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
 }
 
 .frame-copy .eyebrow {
@@ -5029,7 +5097,7 @@ body.modal-open {
   letter-spacing: 0.25em;
   color: var(--cyan);
   margin-bottom: 1rem;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.5rem;
 }
@@ -5046,29 +5114,32 @@ body.modal-open {
 
 .frame-copy h2 {
   font-family: var(--font-headings);
-  font-size: 4rem;
+  font-size: clamp(2rem, 5.5vw, 4.5rem);
   line-height: 0.95;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   text-transform: uppercase;
   color: var(--white);
 }
 
 .frame-stages-wrapper {
   position: relative;
-  height: 120px;
+  height: 100px;
+  margin-top: 1rem;
 }
 
 .frame-stage-copy {
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
+  text-align: center;
   font-family: var(--font-body);
-  font-size: 1.25rem;
+  font-size: clamp(1rem, 2vw, 1.4rem);
   line-height: 1.5;
   color: var(--muted);
   opacity: 0;
   transform: translateY(15px);
-  transition: opacity 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   pointer-events: none;
 }
 
@@ -5079,32 +5150,44 @@ body.modal-open {
   color: var(--white);
 }
 
+.frame-motto {
+  display: block;
+  font-family: var(--font-headings);
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  letter-spacing: 0.3em;
+  color: var(--cyan);
+  margin-top: 0.75rem;
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
+}
+
 .character-frame-stack {
-  position: relative;
-  width: 45vw;
-  height: 80vh;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 3;
+  z-index: 1;
   transition: transform 0.1s ease-out;
   pointer-events: none;
 }
 
 .character-frame {
   position: absolute;
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cover full screen */
   opacity: 0;
-  transform: scale(0.95) translate3d(20px, 0, 0);
-  transition: opacity 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 20px rgba(0, 229, 255, 0.05));
+  transform: scale(1.05); /* Zoom in starting state */
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
 
 .character-frame.is-active {
   opacity: 1;
-  transform: scale(1) translate3d(0, 0, 0);
+  transform: scale(1); /* Return to base cover scale */
 }
 
 /* Custom logo branding class style */
@@ -5119,20 +5202,15 @@ body.modal-open {
 
 /* Mobile & Tablet Fallbacks */
 @media (max-width: 1024px) {
-  .frame-scroll-sticky {
-    padding: 0 5%;
-  }
   .frame-copy h2 {
-    font-size: 3rem;
-  }
-  .character-frame-stack {
-    width: 50vw;
+    font-size: clamp(2rem, 5vw, 3.5rem);
   }
 }
 
 @media (max-width: 768px) {
   .frame-scroll-section {
     height: auto !important;
+    margin-top: 0 !important; /* Reset overlap on mobile */
     padding: 4rem 1.5rem;
     overflow: visible;
   }
@@ -5148,6 +5226,7 @@ body.modal-open {
   }
 
   .character-frame-stack {
+    position: relative !important;
     width: 100% !important;
     height: 50vh !important;
     transform: none !important;
@@ -5170,11 +5249,12 @@ body.modal-open {
     width: 100%;
     max-width: 100%;
     text-align: center;
+    padding: 0;
   }
 
   .frame-copy h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
+    font-size: 2.2rem;
+    margin-bottom: 1.25rem;
   }
 
   .frame-stages-wrapper {
@@ -5199,6 +5279,7 @@ body.modal-open {
 @media (prefers-reduced-motion: reduce) {
   .frame-scroll-section {
     height: auto !important;
+    margin-top: 0 !important;
     padding: 5rem 2rem;
   }
 
@@ -5212,6 +5293,7 @@ body.modal-open {
   }
 
   .character-frame-stack {
+    position: relative !important;
     width: 100% !important;
     height: 50vh !important;
     transform: none !important;

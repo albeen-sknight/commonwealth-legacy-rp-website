@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="css/styles.css">
 
   <!-- Preload critical hero and character scrub frames -->
+  <link rel="preload" href="assets/img/brand/reveal_text_logo.png" as="image">
   <link rel="preload" href="assets/img/hero/hero_primary.webp" as="image">
   <link rel="preload" href="assets/img/characters/char1.webp" as="image">
   <link rel="preload" href="assets/img/characters/char2.webp" as="image">
@@ -43,15 +44,16 @@
     <!-- Chapter Side Scroll Navigation -->
     <nav class="chapter-indicator" aria-label="Homepage chapters">
       <a href="#enter" data-chapter-link="enter"><span>01</span>Enter</a>
-      <a href="#paths" data-chapter-link="paths"><span>02</span>Paths</a>
-      <a href="#departments" data-chapter-link="departments"><span>03</span>Departments</a>
-      <a href="#life" data-chapter-link="life"><span>04</span>Life</a>
-      <a href="#explore" data-chapter-link="explore"><span>05</span>Explore</a>
-      <a href="#justice" data-chapter-link="justice"><span>06</span>Consequences</a>
-      <a href="#showcases" data-chapter-link="showcases"><span>07</span>Showcases</a>
-      <a href="#gallery" data-chapter-link="gallery"><span>08</span>Gallery</a>
-      <a href="#status" data-chapter-link="status"><span>09</span>Status</a>
-      <a href="#join" data-chapter-link="join"><span>10</span>Join</a>
+      <a href="#legacy-frame-scroll" data-chapter-link="legacy-scroll"><span>02</span>Legacy</a>
+      <a href="#paths" data-chapter-link="paths"><span>03</span>Paths</a>
+      <a href="#departments" data-chapter-link="departments"><span>04</span>Departments</a>
+      <a href="#life" data-chapter-link="life"><span>05</span>Life</a>
+      <a href="#explore" data-chapter-link="explore"><span>06</span>Explore</a>
+      <a href="#justice" data-chapter-link="justice"><span>07</span>Consequences</a>
+      <a href="#showcases" data-chapter-link="showcases"><span>08</span>Showcases</a>
+      <a href="#gallery" data-chapter-link="gallery"><span>09</span>Gallery</a>
+      <a href="#status" data-chapter-link="status"><span>10</span>Status</a>
+      <a href="#join" data-chapter-link="join"><span>11</span>Join</a>
     </nav>
 
     <!-- CHAPTER 01: Enter the Commonwealth (Title Reveal Opening) -->
@@ -73,9 +75,11 @@
           </div>
         </div>
 
-        <!-- Stage 1: Big dramatic title COMMONWEALTH -->
-        <div class="hero-stage stage-dramatic-text">
-          <h2 class="dramatic-title">COMMONWEALTH</h2>
+        <!-- Stage 1 & 2: Text Pass-Through / Letter Tunnel Effect -->
+        <div class="hero-stage reveal-pass-through-stage">
+          <div class="reveal-text-tunnel">
+            <img class="reveal-text-logo" src="assets/img/brand/reveal_text_logo.png" alt="COMMONWEALTH LEGACY RP Text Logo">
+          </div>
         </div>
 
         <!-- Stage 2: Logo block/wordmark -->
@@ -134,7 +138,10 @@
             <p class="frame-stage-copy" data-frame-copy="2">Every second matters.</p>
             <p class="frame-stage-copy" data-frame-copy="3">Presence changes the scene.</p>
             <p class="frame-stage-copy" data-frame-copy="4">The line holds.</p>
-            <p class="frame-stage-copy" data-frame-copy="5">Your legacy starts here.</p>
+            <p class="frame-stage-copy" data-frame-copy="5">
+              Your legacy starts here.
+              <span class="frame-motto">LAW &bull; LIFE &bull; LEGACY</span>
+            </p>
           </div>
         </div>
 
@@ -296,13 +303,13 @@
           <h2 class="chapter-title reveal-story">Make It <span>Yours.</span></h2>
           <p class="chapter-copy reveal-story">A character is more than a job title. Build income, property, relationships, habits, and a reason to keep showing up.</p>
         </div>
-        <div class="life-rail stagger-story" aria-label="Life systems">
-          <a href="jobs.html" class="life-card" data-stagger><span>Legal Jobs</span><p>Earn clean money through civilian careers.</p></a>
-          <a href="housing.html" class="life-card" data-stagger><span>Housing</span><p>Own spaces that make your character feel grounded.</p></a>
-          <a href="housing.html" class="life-card" data-stagger><span>Vehicles</span><p>Progress from practical rides to personal statement pieces.</p></a>
-          <a href="businesses.html" class="life-card" data-stagger><span>Businesses</span><p>Run player-facing services with community impact.</p></a>
-          <a href="jobs.html" class="life-card" data-stagger><span>Economy</span><p>Make choices around work, risk, and investment.</p></a>
-          <a href="join.html" class="life-card" data-stagger><span>Progression</span><p>Let your story evolve through earned reputation.</p></a>
+        <div class="life-rail stagger-story" aria-label="Life systems" style="width: 100%; max-width: 100%;">
+          <a href="jobs.html" class="life-card" style="background-image: linear-gradient(to top, rgba(10, 13, 17, 0.95) 0%, rgba(10, 13, 17, 0.45) 100%), url('assets/img/regions/region_industrial.webp'); background-size: cover; background-position: center;" data-stagger><span>Legal Jobs</span><p>Earn clean money through civilian careers.</p></a>
+          <a href="housing.html" class="life-card" style="background-image: linear-gradient(to top, rgba(10, 13, 17, 0.95) 0%, rgba(10, 13, 17, 0.45) 100%), url('assets/img/hero/hero_alt.webp'); background-size: cover; background-position: center;" data-stagger><span>Housing</span><p>Own spaces that make your character feel grounded.</p></a>
+          <a href="housing.html" class="life-card" style="background-image: linear-gradient(to top, rgba(10, 13, 17, 0.95) 0%, rgba(10, 13, 17, 0.45) 100%), url('assets/img/regions/region_patrol_wet.webp'); background-size: cover; background-position: center;" data-stagger><span>Vehicles</span><p>Progress from practical rides to personal statement pieces.</p></a>
+          <a href="businesses.html" class="life-card" style="background-image: linear-gradient(to top, rgba(10, 13, 17, 0.95) 0%, rgba(10, 13, 17, 0.45) 100%), url('assets/img/characters/role_civilian.webp'); background-size: cover; background-position: center;" data-stagger><span>Businesses</span><p>Run player-facing services with community impact.</p></a>
+          <a href="jobs.html" class="life-card" style="background-image: linear-gradient(to top, rgba(10, 13, 17, 0.95) 0%, rgba(10, 13, 17, 0.45) 100%), url('assets/img/regions/region_courthouse_district.webp'); background-size: cover; background-position: center;" data-stagger><span>Economy</span><p>Make choices around work, risk, and investment.</p></a>
+          <a href="join.html" class="life-card" style="background-image: linear-gradient(to top, rgba(10, 13, 17, 0.95) 0%, rgba(10, 13, 17, 0.45) 100%), url('assets/img/regions/region_state_patrol_routes.webp'); background-size: cover; background-position: center;" data-stagger><span>Progression</span><p>Let your story evolve through earned reputation.</p></a>
         </div>
       </div>
     </section>
@@ -480,8 +487,8 @@
           </div>
 
           <!-- Showcase 3: EMS Response -->
-          <div class="showcase-card" data-stagger onclick="openTrailerModal('assets/img/characters/role_medic.webp')">
-            <div class="showcase-thumb" style="background-image: url('assets/img/characters/role_medic.webp')">
+          <div class="showcase-card" data-stagger onclick="openTrailerModal('virginiaDrone')">
+            <div class="showcase-thumb" style="background-image: url('assets/img/video-thumbnails/showcase_ems.webp')">
               <span class="showcase-play-icon"></span>
             </div>
             <div class="showcase-content">

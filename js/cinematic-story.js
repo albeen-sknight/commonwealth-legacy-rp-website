@@ -146,7 +146,7 @@ function initHeroScrollSequence(reduceMotion) {
   // Cache stage elements
   const stages = {
     landing: enterSection.querySelector('.stage-landing'),
-    dramatic: enterSection.querySelector('.stage-dramatic-text'),
+    tunnel: enterSection.querySelector('.reveal-pass-through-stage'),
     logo: enterSection.querySelector('.stage-logo-wordmark'),
     release: enterSection.querySelector('.stage-release-date'),
     finalHero: enterSection.querySelector('.stage-final-hero')
@@ -201,13 +201,17 @@ function initHeroScrollSequence(reduceMotion) {
     const progress = Math.max(0, Math.min(1, window.scrollY / scrollRange));
 
     // 1. Dark overlay opacity interpolation
-    let overlayOpacity = 0.85;
-    if (progress < 0.12) {
-      const t = progress / 0.12;
-      overlayOpacity = 0.95 - 0.10 * t;
-    } else if (progress > 0.88) {
-      const t = Math.min(1, (progress - 0.88) / 0.10);
-      overlayOpacity = 0.85 - 0.35 * t;
+    let overlayOpacity = 0.95;
+    if (progress <= 0.18) {
+      overlayOpacity = 0.95;
+    } else if (progress <= 0.42) {
+      const t = (progress - 0.18) / (0.42 - 0.18);
+      overlayOpacity = 0.95 - 0.15 * t; // goes from 0.95 to 0.80
+    } else if (progress <= 0.74) {
+      overlayOpacity = 0.80;
+    } else {
+      const t = (progress - 0.74) / (1.00 - 0.74);
+      overlayOpacity = 0.80 - 0.40 * t; // goes from 0.80 to 0.40
     }
     if (darkOverlay) {
       darkOverlay.style.opacity = overlayOpacity;
@@ -225,39 +229,54 @@ function initHeroScrollSequence(reduceMotion) {
     }
 
     // 3. Stage 0: Landing / scroll indicator
-    const stage0 = getStageStyles(progress, 0, 0, 0.0, 0.12);
+    const stage0 = getStageStyles(progress, 0, 0, 0.0, 0.18);
     if (stages.landing) {
       stages.landing.style.opacity = stage0.opacity;
       stages.landing.style.transform = `translate3d(0, ${stage0.translateY}px, 0)`;
       stages.landing.classList.toggle('stage-active', stage0.active);
     }
 
-    // 4. Stage 1: "COMMONWEALTH"
-    const stage1 = getStageStyles(progress, 0.12, 0.22, 0.30, 0.40);
-    if (stages.dramatic) {
-      stages.dramatic.style.opacity = stage1.opacity;
-      stages.dramatic.style.transform = `translate3d(0, ${stage1.translateY}px, 0) scale(${stage1.scale})`;
-      stages.dramatic.classList.toggle('stage-active', stage1.active);
+    // 4. Stage 1 & 2: Letter Tunnel Pass-Through
+    const stageTunnel = getStageStyles(progress, 0.18, 0.22, 0.38, 0.42);
+    if (stages.tunnel) {
+      stages.tunnel.style.opacity = stageTunnel.opacity;
+      stages.tunnel.classList.toggle('stage-active', stageTunnel.active);
+
+      // Handle non-linear text zoom pass-through
+      const tunnelLogo = stages.tunnel.querySelector('.reveal-text-logo');
+      if (tunnelLogo && stageTunnel.active) {
+        const t = (progress - 0.18) / (0.42 - 0.18); // normalized stage progress
+        // Non-linear camera zoom out (pulls out of letters)
+        const scaleVal = 15 / (1 + 14 * t);
+        // Add a subtle rotate for extra visual weight
+        const rotateVal = (1 - t) * -2;
+        tunnelLogo.style.transform = `scale(${scaleVal}) rotate(${rotateVal}deg) translate3d(0,0,0)`;
+        
+        let logoOpacity = 1;
+        if (t < 0.15) logoOpacity = t / 0.15;
+        else if (t > 0.85) logoOpacity = (1 - t) / 0.15;
+        tunnelLogo.style.opacity = logoOpacity;
+      }
     }
 
-    // 5. Stage 2: Logo block/wordmark
-    const stage2 = getStageStyles(progress, 0.40, 0.50, 0.58, 0.68);
+    // 5. Stage 3: Logo block/wordmark
+    const stage2 = getStageStyles(progress, 0.42, 0.46, 0.54, 0.58);
     if (stages.logo) {
       stages.logo.style.opacity = stage2.opacity;
       stages.logo.style.transform = `translate3d(0, ${stage2.translateY}px, 0) scale(${stage2.scale})`;
       stages.logo.classList.toggle('stage-active', stage2.active);
     }
 
-    // 6. Stage 3: Release Date "COMING OCTOBER 19 2026"
-    const stage3 = getStageStyles(progress, 0.68, 0.78, 0.84, 0.90);
+    // 6. Stage 4: Release Date
+    const stage3 = getStageStyles(progress, 0.58, 0.62, 0.70, 0.74);
     if (stages.release) {
       stages.release.style.opacity = stage3.opacity;
       stages.release.style.transform = `translate3d(0, ${stage3.translateY}px, 0) scale(${stage3.scale})`;
       stages.release.classList.toggle('stage-active', stage3.active);
     }
 
-    // 7. Stage 4: Final Hero Block with Actions
-    const stage4 = getStageStyles(progress, 0.90, 0.98, 2.0, 2.0);
+    // 7. Stage 5: Final Hero Block with Actions
+    const stage4 = getStageStyles(progress, 0.74, 0.82, 2.0, 2.0);
     if (stages.finalHero) {
       stages.finalHero.style.opacity = stage4.opacity;
       stages.finalHero.style.transform = `translate3d(0, ${stage4.translateY}px, 0)`;
@@ -318,7 +337,20 @@ function initCharacterFrameScroll(reduceMotion) {
     progress = Math.max(0, Math.min(1, progress));
 
     // Determine current active index based on progress segments
-    const frameIndex = Math.min(totalFrames - 1, Math.floor(progress * totalFrames));
+    let frameIndex = 0;
+    if (progress <= 0.16) {
+      frameIndex = 0;
+    } else if (progress <= 0.33) {
+      frameIndex = 1;
+    } else if (progress <= 0.50) {
+      frameIndex = 2;
+    } else if (progress <= 0.66) {
+      frameIndex = 3;
+    } else if (progress <= 0.83) {
+      frameIndex = 4;
+    } else {
+      frameIndex = 5;
+    }
 
     // Update active frame state
     frames.forEach((f, idx) => {
@@ -328,7 +360,7 @@ function initCharacterFrameScroll(reduceMotion) {
     // Apply scale parallax zoom to the stack
     const stack = section.querySelector('.character-frame-stack');
     if (stack) {
-      const currentScale = 1.0 + 0.04 * progress;
+      const currentScale = 1.03 - 0.03 * progress;
       stack.style.transform = `scale(${currentScale})`;
     }
 
