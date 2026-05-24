@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://commonwealth-legacy-rp-website.pages.dev/sitemap.xml
