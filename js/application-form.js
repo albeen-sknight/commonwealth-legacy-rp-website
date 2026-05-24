@@ -18,7 +18,7 @@ const Scenarios = {
       <textarea id="scen-civ-2" class="form-control scenario-field" placeholder="What is your character's primary legal dream? What moral limits or desperation would drive them into underworld progression?" required></textarea>
     </div>
   `,
-  police: `
+  vsp: `
     <div class="form-group">
       <label class="form-label" for="scen-leo-1">Scenario: Tactical FearRP (Min. 40 Characters)</label>
       <textarea id="scen-leo-1" class="form-control scenario-field" placeholder="Describe the concept of FearRP. How should a Trooper react if ambushed and held at gunpoint during a routine traffic stop?" required></textarea>
@@ -28,7 +28,17 @@ const Scenarios = {
       <textarea id="scen-leo-2" class="form-control scenario-field" placeholder="Explain the legal difference between a simple traffic stop, a temporary detention, and a full arrest under the penal code." required></textarea>
     </div>
   `,
-  ems: `
+  vbso: `
+    <div class="form-group">
+      <label class="form-label" for="scen-leo-1">Scenario: Tactical FearRP (Min. 40 Characters)</label>
+      <textarea id="scen-leo-1" class="form-control scenario-field" placeholder="Describe the concept of FearRP. How should a Deputy react if ambushed and held at gunpoint during a routine traffic stop?" required></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="scen-leo-2">Legal Boundaries (Min. 40 Characters)</label>
+      <textarea id="scen-leo-2" class="form-control scenario-field" placeholder="Explain the legal difference between a simple traffic stop, a temporary detention, and a full arrest under the penal code." required></textarea>
+    </div>
+  `,
+  vems: `
     <div class="form-group">
       <label class="form-label" for="scen-ems-1">Scenario: Structural Triage (Min. 40 Characters)</label>
       <textarea id="scen-ems-1" class="form-control scenario-field" placeholder="A structural apartment fire is active with heavy smoke and trapped civilians. Detail your medical rescue entries and triage priorities..." required></textarea>
@@ -46,6 +56,16 @@ const Scenarios = {
     <div class="form-group">
       <label class="form-label" for="scen-doj-2">Bail & Defense duties (Min. 40 Characters)</label>
       <textarea id="scen-doj-2" class="form-control scenario-field" placeholder="Detail the core duties of a Public Defender in ensuring a fair trial during District Attorney prosecution disputes." required></textarea>
+    </div>
+  `,
+  staff: `
+    <div class="form-group">
+      <label class="form-label" for="scen-staff-1">Scenario: Staff Conflict Resolution (Min. 40 Characters)</label>
+      <textarea id="scen-staff-1" class="form-control scenario-field" placeholder="Explain how you would handle a dispute where two players are arguing in a support channel about an in-game rule breach..." required></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="scen-staff-2">Moderation Philosophy (Min. 40 Characters)</label>
+      <textarea id="scen-staff-2" class="form-control scenario-field" placeholder="Describe your moderation experience and how you balance strict rule enforcement with teaching new players server etiquette." required></textarea>
     </div>
   `
 };
@@ -83,7 +103,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const ageWarning = document.getElementById('age-warning-alert');
   if (ageInput && ageWarning) {
     ageInput.addEventListener('input', () => {
-      if (parseInt(ageInput.value) < 18) {
+      const ageVal = parseInt(ageInput.value, 10);
+      if (isNaN(ageVal)) {
+        ageWarning.style.display = 'none';
+      } else if (ageVal < 16) {
+        ageWarning.style.color = 'var(--red)';
+        ageWarning.innerText = 'ERROR: You must be at least 16 years old to apply to Commonwealth Legacy RP.';
+        ageWarning.style.display = 'block';
+      } else if (ageVal < 18) {
+        ageWarning.style.color = 'var(--gold)';
+        ageWarning.innerText = 'NOTE: High maturity is required. Under 16 applications will be automatically rejected.';
         ageWarning.style.display = 'block';
       } else {
         ageWarning.style.display = 'none';
@@ -108,6 +137,9 @@ function updateScenarioQuestions() {
 // Step navigation
 function changeStep(direction) {
   if (direction === 1 && !validateCurrentStep()) return; // Block step forward if invalid
+
+  // Clear previous errors when moving
+  clearValidationErrors();
 
   // Move step index
   currentStep += direction;
@@ -135,26 +167,90 @@ function toggleCheckbox(id) {
   const box = document.getElementById(id);
   if (box) {
     box.checked = !box.checked;
+    box.dispatchEvent(new Event('change'));
   }
+}
+
+// Show validation errors cleanly
+function showValidationError(message, fieldsToHighlight = []) {
+  const banner = document.getElementById('validation-error-banner');
+  const bannerText = document.getElementById('validation-error-text');
+  if (banner && bannerText) {
+    bannerText.innerText = message;
+    banner.style.display = 'flex';
+    banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  fieldsToHighlight.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.classList.add('is-invalid');
+      
+      const clearError = () => {
+        el.classList.remove('is-invalid');
+        el.removeEventListener('input', clearError);
+        el.removeEventListener('change', clearError);
+        
+        // Hide banner if no more invalid fields in the current step
+        const stepContainer = document.getElementById(`step-${currentStep}`);
+        if (stepContainer && !stepContainer.querySelector('.is-invalid')) {
+          if (banner) banner.style.display = 'none';
+        }
+      };
+
+      el.addEventListener('input', clearError);
+      el.addEventListener('change', clearError);
+    }
+  });
+}
+
+function clearValidationErrors() {
+  const banner = document.getElementById('validation-error-banner');
+  if (banner) banner.style.display = 'none';
+
+  const invalids = document.querySelectorAll('.is-invalid');
+  invalids.forEach(el => el.classList.remove('is-invalid'));
 }
 
 // Form validations
 function validateCurrentStep() {
-  if (currentStep === 1) {
-    const discord = document.getElementById('ooc-discord').value.trim();
-    const discordId = document.getElementById('ooc-discord-id').value.trim();
-    const age = document.getElementById('ooc-age').value.trim();
-    const hours = document.getElementById('ooc-hours').value.trim();
-    const experience = document.getElementById('ooc-experience').value.trim();
-    const rpMeaning = document.getElementById('ooc-rp-meaning').value.trim();
+  clearValidationErrors();
 
-    if (!discord || !discordId || !age || !hours || !experience || !rpMeaning) {
-      alert("Please fill out all Out-of-Character player details and essays before proceeding.");
+  if (currentStep === 1) {
+    const discordEl = document.getElementById('ooc-discord');
+    const discordIdEl = document.getElementById('ooc-discord-id');
+    const ageEl = document.getElementById('ooc-age');
+    const hoursEl = document.getElementById('ooc-hours');
+    const experienceEl = document.getElementById('ooc-experience');
+    const rpMeaningEl = document.getElementById('ooc-rp-meaning');
+
+    const discord = discordEl.value.trim();
+    const discordId = discordIdEl.value.trim();
+    const ageVal = parseInt(ageEl.value.trim(), 10);
+    const hours = hoursEl.value.trim();
+    const experience = experienceEl.value.trim();
+    const rpMeaning = rpMeaningEl.value.trim();
+
+    let missing = [];
+    if (!discord) missing.push('ooc-discord');
+    if (!discordId) missing.push('ooc-discord-id');
+    if (isNaN(ageVal)) missing.push('ooc-age');
+    if (!hours) missing.push('ooc-hours');
+    if (!experience) missing.push('ooc-experience');
+    if (!rpMeaning) missing.push('ooc-rp-meaning');
+
+    if (missing.length > 0) {
+      showValidationError("Please fill out all Out-of-Character player details and essay fields.", missing);
+      return false;
+    }
+
+    if (ageVal < 16) {
+      showValidationError("Minimum age requirement of 16 not met. You cannot submit an application.", ['ooc-age']);
       return false;
     }
 
     if (!/^\d+$/.test(discordId)) {
-      alert("Discord User ID must be a numerical value. You can find this in Discord Settings > Advanced > Developer Mode.");
+      showValidationError("Discord User ID must be a numerical value (Developer Mode ID).", ['ooc-discord-id']);
       return false;
     }
 
@@ -162,16 +258,23 @@ function validateCurrentStep() {
   }
 
   if (currentStep === 2) {
-    const name = document.getElementById('ic-name').value.trim();
-    const backstory = document.getElementById('ic-backstory').value.trim();
+    const nameEl = document.getElementById('ic-name');
+    const backstoryEl = document.getElementById('ic-backstory');
+
+    const name = nameEl.value.trim();
+    const backstory = backstoryEl.value.trim();
     const words = backstory.split(/\s+/).filter(w => w.length > 0);
 
-    if (!name || !backstory) {
-      alert("Please fill out all In-Character profile details.");
+    let missing = [];
+    if (!name) missing.push('ic-name');
+    if (!backstory) missing.push('ic-backstory');
+
+    if (missing.length > 0) {
+      showValidationError("Please fill out all In-Character profile details.", missing);
       return false;
     }
     if (words.length < 100) {
-      alert(`Your character backstory must be at least 100 words. Currently: ${words.length} words.`);
+      showValidationError(`Your character backstory must be at least 100 words. Currently: ${words.length} words.`, ['ic-backstory']);
       return false;
     }
     return true;
@@ -179,28 +282,33 @@ function validateCurrentStep() {
 
   if (currentStep === 3) {
     const fields = document.querySelectorAll('.scenario-field');
-    let allValid = true;
+    let invalidFields = [];
 
     fields.forEach(field => {
       if (field.value.trim().length < 40) {
-        allValid = false;
+        invalidFields.push(field.id);
       }
     });
 
-    if (!allValid) {
-      alert("Please answer both roleplay scenarios in detail (minimum 40 characters each).");
+    if (invalidFields.length > 0) {
+      showValidationError("Please answer both roleplay scenarios in detail (minimum 40 characters each).", invalidFields);
       return false;
     }
     return true;
   }
 
   if (currentStep === 4) {
-    const check1 = document.getElementById('check-etiquette').checked;
-    const check2 = document.getElementById('check-metagaming').checked;
-    const check3 = document.getElementById('check-voice').checked;
+    const check1El = document.getElementById('check-etiquette');
+    const check2El = document.getElementById('check-metagaming');
+    const check3El = document.getElementById('check-voice');
 
-    if (!check1 || !check2 || !check3) {
-      alert("You must affirm and agree to all server guidelines before submitting your whitelisting application.");
+    let missing = [];
+    if (!check1El.checked) missing.push('check-etiquette');
+    if (!check2El.checked) missing.push('check-metagaming');
+    if (!check3El.checked) missing.push('check-voice');
+
+    if (missing.length > 0) {
+      showValidationError("You must affirm and agree to all server guidelines before submitting your whitelisting application.", missing);
       return false;
     }
     return true;
@@ -257,23 +365,26 @@ function updateWizardControls() {
   }
 }
 
-// Hash loader transmittal simulation
-// Helper to aggregate scenario answers
+// Aggregates scenario answers based on interest
 function getScenarioAnswer() {
   const interest = document.getElementById('ic-interest').value;
   let s1 = '', s2 = '';
+  
   if (interest === 'civilian') {
     s1 = document.getElementById('scen-civ-1')?.value || '';
     s2 = document.getElementById('scen-civ-2')?.value || '';
-  } else if (interest === 'police') {
+  } else if (interest === 'vsp' || interest === 'vbso') {
     s1 = document.getElementById('scen-leo-1')?.value || '';
     s2 = document.getElementById('scen-leo-2')?.value || '';
-  } else if (interest === 'ems') {
+  } else if (interest === 'vems') {
     s1 = document.getElementById('scen-ems-1')?.value || '';
     s2 = document.getElementById('scen-ems-2')?.value || '';
   } else if (interest === 'doj') {
     s1 = document.getElementById('scen-doj-1')?.value || '';
     s2 = document.getElementById('scen-doj-2')?.value || '';
+  } else if (interest === 'staff') {
+    s1 = document.getElementById('scen-staff-1')?.value || '';
+    s2 = document.getElementById('scen-staff-2')?.value || '';
   }
   return `Scenario 1 Answer:\n${s1.trim()}\n\nScenario 2 Answer:\n${s2.trim()}`;
 }
@@ -376,6 +487,27 @@ function runSubmissionLoader() {
     nextBtn.innerText = "Submitting...";
   }
 
+  // Map department keys to human-readable labels
+  const departmentLabels = {
+    vsp: "Virginia State Police (VSP)",
+    vbso: "Virginia Beach Sheriff's Office (VBSO)",
+    vems: "Virginia Emergency Medical Services (VEMS)",
+    doj: "Department of Justice (DOJ)",
+    civilian: "Civilian",
+    staff: "Staff"
+  };
+
+  const truncateField = (str, limit = 1000) => {
+    if (!str) return "";
+    if (str.length > limit) {
+      return str.slice(0, limit) + "\n\n... (truncated)";
+    }
+    return str;
+  };
+
+  const rawDept = document.getElementById('ic-interest').value.trim();
+  const readableDept = departmentLabels[rawDept] || rawDept;
+
   // Gather form data matching Cloudflare Worker expects
   const applicationData = {
     discordName: document.getElementById('ooc-discord').value.trim(),
@@ -383,12 +515,12 @@ function runSubmissionLoader() {
     age: parseInt(document.getElementById('ooc-age').value.trim(), 10),
     timezone: document.getElementById('ooc-timezone').value.trim(),
     characterName: document.getElementById('ic-name').value.trim(),
-    department: document.getElementById('ic-interest').value.trim(),
-    experience: document.getElementById('ooc-experience').value.trim(),
+    department: readableDept, // Human readable label sent to Worker
+    experience: truncateField(document.getElementById('ooc-experience').value.trim()),
     availability: document.getElementById('ooc-hours').value.trim(),
-    motivation: document.getElementById('ic-backstory').value.trim(),
-    roleplayMeaning: document.getElementById('ooc-rp-meaning').value.trim(),
-    scenario: getScenarioAnswer(),
+    motivation: truncateField(document.getElementById('ic-backstory').value.trim()),
+    roleplayMeaning: truncateField(document.getElementById('ooc-rp-meaning').value.trim()),
+    scenario: truncateField(getScenarioAnswer()),
     website: document.getElementById('website').value
   };
 

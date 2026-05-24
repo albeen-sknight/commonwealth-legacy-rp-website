@@ -70,9 +70,9 @@
 
             <div class="form-grid">
               <div class="form-group">
-                <label class="form-label" for="ooc-age">Real Age (Must be 18+)</label>
-                <input type="number" id="ooc-age" class="form-control" placeholder="e.g. 24" min="15" required>
-                <span id="age-warning-alert" style="color: var(--gold); font-size: 0.75rem; font-weight: 600; display: none; margin-top: 0.25rem;">NOTE: Commonwealth Legacy RP requires high maturity. 18+ is strongly preferred.</span>
+                <label class="form-label" for="ooc-age">Real Age (Must be 16+)</label>
+                <input type="number" id="ooc-age" class="form-control" placeholder="e.g. 20" min="16" required>
+                <span id="age-warning-alert" style="color: var(--gold); font-size: 0.75rem; font-weight: 600; display: none; margin-top: 0.25rem;">NOTE: High maturity is required. Under 16 applications will be automatically rejected.</span>
               </div>
               <div class="form-group">
                 <label class="form-label" for="ooc-hours">Availability (Hours/Week)</label>
@@ -116,10 +116,12 @@
               <div class="form-group">
                 <label class="form-label" for="ic-interest">Department / Career Path Focus</label>
                 <select id="ic-interest" class="form-control" style="background-color: var(--surface-2);" onchange="updateScenarioQuestions()">
-                  <option value="civilian">Civilian Jobs & Underworld Progression</option>
-                  <option value="police">Virginia State Police (VSP / VBSO)</option>
-                  <option value="ems">Virginia Emergency Medical (VEMS)</option>
-                  <option value="doj">Department of Justice (Attorney / Judge)</option>
+                  <option value="vsp">Virginia State Police (VSP)</option>
+                  <option value="vbso">Virginia Beach Sheriff's Office (VBSO)</option>
+                  <option value="vems">Virginia Emergency Medical Services (VEMS)</option>
+                  <option value="doj">Department of Justice (DOJ)</option>
+                  <option value="civilian">Civilian</option>
+                  <option value="staff">Staff Application</option>
                 </select>
               </div>
             </div>
@@ -210,6 +212,14 @@
                 <button type="button" class="btn btn-secondary" onclick="retryApplication()">Go Back & Edit</button>
               </div>
             </div>
+          </div>
+
+          <!-- Validation Error Banner -->
+          <div id="validation-error-banner" class="validation-error-alert" style="display: none; margin-top: 1.5rem; margin-bottom: 1.5rem;">
+            <div class="validation-error-icon">
+              <svg viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: var(--red);"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+            </div>
+            <span id="validation-error-text">Please fill out all required fields.</span>
           </div>
 
           <!-- Action Buttons -->

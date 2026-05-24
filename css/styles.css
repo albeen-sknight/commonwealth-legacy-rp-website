@@ -2392,6 +2392,33 @@ textarea.form-control {
   text-decoration: underline;
 }
 
+/* Validation Error Alert Banner */
+.validation-error-alert {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid var(--red);
+  padding: 1rem 1.5rem;
+  border-radius: 6px;
+  color: #FCA5A5;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  animation: slideUpIn 0.3s ease;
+}
+
+.validation-error-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.form-control.is-invalid {
+  border-color: var(--red) !important;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.2) !important;
+}
+
 /* Wizard / Step Application Form CSS */
 .wizard-header {
   display: flex;
