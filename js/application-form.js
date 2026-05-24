@@ -142,13 +142,22 @@ function toggleCheckbox(id) {
 function validateCurrentStep() {
   if (currentStep === 1) {
     const discord = document.getElementById('ooc-discord').value.trim();
+    const discordId = document.getElementById('ooc-discord-id').value.trim();
     const age = document.getElementById('ooc-age').value.trim();
     const hours = document.getElementById('ooc-hours').value.trim();
+    const experience = document.getElementById('ooc-experience').value.trim();
+    const rpMeaning = document.getElementById('ooc-rp-meaning').value.trim();
 
-    if (!discord || !age || !hours) {
-      alert("Please fill out all Out-of-Character player details before proceeding.");
+    if (!discord || !discordId || !age || !hours || !experience || !rpMeaning) {
+      alert("Please fill out all Out-of-Character player details and essays before proceeding.");
       return false;
     }
+
+    if (!/^\d+$/.test(discordId)) {
+      alert("Discord User ID must be a numerical value. You can find this in Discord Settings > Advanced > Developer Mode.");
+      return false;
+    }
+
     return true;
   }
 
@@ -249,29 +258,166 @@ function updateWizardControls() {
 }
 
 // Hash loader transmittal simulation
+// Helper to aggregate scenario answers
+function getScenarioAnswer() {
+  const interest = document.getElementById('ic-interest').value;
+  let s1 = '', s2 = '';
+  if (interest === 'civilian') {
+    s1 = document.getElementById('scen-civ-1')?.value || '';
+    s2 = document.getElementById('scen-civ-2')?.value || '';
+  } else if (interest === 'police') {
+    s1 = document.getElementById('scen-leo-1')?.value || '';
+    s2 = document.getElementById('scen-leo-2')?.value || '';
+  } else if (interest === 'ems') {
+    s1 = document.getElementById('scen-ems-1')?.value || '';
+    s2 = document.getElementById('scen-ems-2')?.value || '';
+  } else if (interest === 'doj') {
+    s1 = document.getElementById('scen-doj-1')?.value || '';
+    s2 = document.getElementById('scen-doj-2')?.value || '';
+  }
+  return `Scenario 1 Answer:\n${s1.trim()}\n\nScenario 2 Answer:\n${s2.trim()}`;
+}
+
+// Function to handle retrying in case of errors
+function retryApplication() {
+  // Hide error screen, restore loader defaults
+  document.getElementById('submission-error').style.display = 'none';
+  document.getElementById('submission-loader').style.display = 'block';
+  
+  // Go back to step 4
+  currentStep = 4;
+  
+  // Show step 4 content
+  const contents = document.querySelectorAll('.wizard-step-content');
+  contents.forEach((el, index) => {
+    if (index + 1 === currentStep) {
+      el.classList.add('active');
+    } else {
+      el.classList.remove('active');
+    }
+  });
+
+  // Restore wizard header and buttons
+  const header = document.getElementById('app-wizard-header');
+  const actions = document.getElementById('app-wizard-actions');
+  if (header) header.style.display = '';
+  if (actions) actions.style.display = '';
+
+  // Re-enable and reset next button
+  const nextBtn = document.getElementById('btn-next');
+  if (nextBtn) {
+    nextBtn.disabled = false;
+    nextBtn.innerText = "Submit Application";
+  }
+  
+  updateWizardControls();
+}
+
+// Real application submission loader and API fetcher
 function runSubmissionLoader() {
   const progressFill = document.getElementById('submission-progress-fill');
   const percentText = document.getElementById('submission-percent');
   const loaderSection = document.getElementById('submission-loader');
   const successSection = document.getElementById('submission-success');
+  const errorSection = document.getElementById('submission-error');
 
   if (!progressFill || !percentText) return;
 
-  let percent = 0;
-  const interval = setInterval(() => {
-    percent += 5;
-    progressFill.style.width = `${percent}%`;
-    percentText.innerText = `${percent}%`;
+  // Reset view states
+  if (loaderSection) loaderSection.style.display = 'block';
+  if (successSection) successSection.style.display = 'none';
+  if (errorSection) errorSection.style.display = 'none';
 
-    if (percent >= 100) {
+  let percent = 0;
+  progressFill.style.width = '0%';
+  percentText.innerText = '0%';
+
+  let submissionFinished = false;
+  let submissionError = null;
+
+  // Animate loader up to 90% while pending
+  const interval = setInterval(() => {
+    if (!submissionFinished) {
+      if (percent < 90) {
+        percent += Math.floor(Math.random() * 4) + 2; // Increments of 2-5%
+        if (percent > 90) percent = 90;
+        progressFill.style.width = `${percent}%`;
+        percentText.innerText = `${percent}%`;
+      }
+    } else {
       clearInterval(interval);
-      setTimeout(() => {
-        // Hide loader, show success screen
+      if (submissionError) {
+        // Show clean error screen
         if (loaderSection) loaderSection.style.display = 'none';
-        if (successSection) successSection.style.display = 'block';
-      }, 400);
+        if (errorSection) {
+          errorSection.style.display = 'block';
+          const errMsg = document.getElementById('error-message-text');
+          if (errMsg) {
+            errMsg.innerText = submissionError.message || "Application submission failed. Please try again.";
+          }
+        }
+      } else {
+        // Complete progress bar and show success
+        percent = 100;
+        progressFill.style.width = '100%';
+        percentText.innerText = '100%';
+        setTimeout(() => {
+          if (loaderSection) loaderSection.style.display = 'none';
+          if (successSection) successSection.style.display = 'block';
+        }, 300);
+      }
     }
-  }, 120); // Takes ~2.4 seconds to hash transmission completely
+  }, 80);
+
+  // Disable next button to prevent double-submit
+  const nextBtn = document.getElementById('btn-next');
+  if (nextBtn) {
+    nextBtn.disabled = true;
+    nextBtn.innerText = "Submitting...";
+  }
+
+  // Gather form data matching Cloudflare Worker expects
+  const applicationData = {
+    discordName: document.getElementById('ooc-discord').value.trim(),
+    discordId: document.getElementById('ooc-discord-id').value.trim(),
+    age: parseInt(document.getElementById('ooc-age').value.trim(), 10),
+    timezone: document.getElementById('ooc-timezone').value.trim(),
+    characterName: document.getElementById('ic-name').value.trim(),
+    department: document.getElementById('ic-interest').value.trim(),
+    experience: document.getElementById('ooc-experience').value.trim(),
+    availability: document.getElementById('ooc-hours').value.trim(),
+    motivation: document.getElementById('ic-backstory').value.trim(),
+    roleplayMeaning: document.getElementById('ooc-rp-meaning').value.trim(),
+    scenario: getScenarioAnswer(),
+    website: document.getElementById('website').value
+  };
+
+  const APPLICATION_ENDPOINT = "https://clrp-applications.natsu-dragneel13576.workers.dev";
+
+  fetch(APPLICATION_ENDPOINT, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(applicationData)
+  })
+  .then(async (response) => {
+    let result;
+    try {
+      result = await response.json();
+    } catch (e) {
+      throw new Error("Invalid response format received from application server.");
+    }
+    
+    if (!response.ok || !result.ok) {
+      throw new Error(result.error || "Application submission failed.");
+    }
+    submissionFinished = true;
+  })
+  .catch((err) => {
+    submissionError = err;
+    submissionFinished = true;
+  });
 }
 
 // Skeletal submit preventer

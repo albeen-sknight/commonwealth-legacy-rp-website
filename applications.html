@@ -48,6 +48,11 @@
       <div class="glass-panel" style="padding: 3rem; overflow: hidden; position: relative;">
         <form id="whitelist-application-form" onsubmit="handleAppSubmit(event)">
           
+          <!-- Honeypot Field for Spam Prevention -->
+          <div style="display: none;" aria-hidden="true">
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+          
           <!-- Step 1: Out-of-Character (OOC) Details -->
           <div class="wizard-step-content active" id="step-1">
             <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--cyan); border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">OOC Player Details</h3>
@@ -58,9 +63,20 @@
                 <input type="text" id="ooc-discord" class="form-control" placeholder="e.g. trooper_miller" required>
               </div>
               <div class="form-group">
+                <label class="form-label" for="ooc-discord-id">Discord User ID (Numerical)</label>
+                <input type="text" id="ooc-discord-id" class="form-control" placeholder="e.g. 192837465546372819" required>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
                 <label class="form-label" for="ooc-age">Real Age (Must be 18+)</label>
                 <input type="number" id="ooc-age" class="form-control" placeholder="e.g. 24" min="15" required>
                 <span id="age-warning-alert" style="color: var(--gold); font-size: 0.75rem; font-weight: 600; display: none; margin-top: 0.25rem;">NOTE: Commonwealth Legacy RP requires high maturity. 18+ is strongly preferred.</span>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ooc-hours">Availability (Hours/Week)</label>
+                <input type="number" id="ooc-hours" class="form-control" placeholder="e.g. 15" min="1" required>
               </div>
             </div>
 
@@ -75,10 +91,16 @@
                   <option>Australian Eastern (AEST)</option>
                 </select>
               </div>
-              <div class="form-group">
-                <label class="form-label" for="ooc-hours">Availability (Hours/Week)</label>
-                <input type="number" id="ooc-hours" class="form-control" placeholder="e.g. 15" min="1" required>
-              </div>
+            </div>
+
+            <div class="form-group full-width" style="margin-top: 1.5rem;">
+              <label class="form-label" for="ooc-experience">Roleplay Experience</label>
+              <textarea id="ooc-experience" class="form-control" placeholder="Describe your past GTA V RP or other roleplay experience (communities, duration, roles played)..." required></textarea>
+            </div>
+            
+            <div class="form-group full-width" style="margin-top: 1.5rem;">
+              <label class="form-label" for="ooc-rp-meaning">What does roleplay mean to you?</label>
+              <textarea id="ooc-rp-meaning" class="form-control" placeholder="Explain your concept of quality roleplay, character development, and interaction standards..." required></textarea>
             </div>
           </div>
 
@@ -164,14 +186,28 @@
             <div id="submission-success" class="success-screen" style="display: none;">
               <div class="success-icon-wrapper" id="success-icon-box"></div>
               <h2 style="font-size: 2.2rem; margin-bottom: 1rem; text-transform: uppercase;">Verification Received</h2>
-              <p style="color: var(--muted); font-size: 1rem; max-width: 500px; margin: 0 auto 2.5rem auto;">
-                Your background profile and roleplay scenario answers have been securely synced to our application database. Reviews take under 12 hours.
+              <p id="success-message-text" style="color: var(--muted); font-size: 1.1rem; max-width: 500px; margin: 0 auto 2.5rem auto;">
+                Application submitted. Staff will review it in Discord.
               </p>
               <div style="display: flex; gap: 1.5rem; justify-content: center;">
                 <a href="index.html" class="btn btn-secondary">Return Home</a>
                 <a href="https://discord.gg/uPz5cgq4gr" target="_blank" class="btn btn-discord">
                   Open Discord
                 </a>
+              </div>
+            </div>
+
+            <!-- Error screen state hidden initially -->
+            <div id="submission-error" class="error-screen" style="display: none; text-align: center; padding: 4rem 2rem;">
+              <div class="error-icon-wrapper" style="color: var(--red); margin-bottom: 2rem; display: flex; justify-content: center;">
+                <svg viewBox="0 0 24 24" style="width: 60px; height: 60px; fill: var(--red);"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+              </div>
+              <h2 style="font-size: 2.2rem; margin-bottom: 1rem; text-transform: uppercase; color: var(--red);">Submission Failed</h2>
+              <p id="error-message-text" style="color: var(--muted); font-size: 1.05rem; max-width: 500px; margin: 0 auto 2.5rem auto;">
+                An error occurred while submitting your application. Please check your connection and try again.
+              </p>
+              <div style="display: flex; gap: 1.5rem; justify-content: center;">
+                <button type="button" class="btn btn-secondary" onclick="retryApplication()">Go Back & Edit</button>
               </div>
             </div>
           </div>
@@ -181,7 +217,6 @@
             <button type="button" class="btn btn-secondary" id="btn-prev" onclick="changeStep(-1)" style="visibility: hidden;">Back Step</button>
             <button type="button" class="btn btn-primary" id="btn-next" onclick="changeStep(1)">Next Step</button>
           </div>
-
         </form>
       </div>
     </div>
