@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact & Community | Commonwealth Legacy RP</title>
+  <meta name="description" content="Connect with the staff team of Commonwealth Legacy RP. Submit support queries, browse the administrative roster, and join community channels.">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
+  <meta name="theme-color" content="#0A0D11">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/components.js" defer></script>
+  <script src="js/animations.js" defer></script>
+</head>
+<body>
+
+  <!-- Subpage Cinematic Hero -->
+  <section class="subpage-hero">
+    <div class="subpage-hero-overlay"></div>
+    <div class="container subpage-hero-container">
+      <div class="breadcrumbs">
+        <a href="index.html">Home</a> <span>/</span> Contact & Socials
+      </div>
+      <h1 class="subpage-title">Connect With Us</h1>
+      <p class="section-desc" style="max-width: 600px;">
+        Get in touch with the community management team, browse our administrative staff listings, or resolve whitelisting inquiries.
+      </p>
+    </div>
+  </section>
+
+  <!-- Roster and Contact Form Grid -->
+  <section class="section-spacer">
+    <div class="container">
+      <div class="status-grid" style="grid-template-columns: 1.2fr 1.8fr; gap: 4rem;">
+        
+        <!-- Contact Information Details -->
+        <div>
+          <div class="section-label">GET IN TOUCH</div>
+          <h2 class="section-title" style="font-size: 2.2rem; margin-bottom: 1.5rem;">Reach Server Management</h2>
+          <p style="margin-bottom: 2rem;">
+            For general player reports, bug submissions, or corporate business licensing appeals, we strongly suggest filing ticket logs in our Discord. For serious partnerships or administrative matters, submit an inquiry.
+          </p>
+
+          <div class="glass-panel" style="margin-bottom: 2rem; padding: 1.5rem;">
+            <h3 style="color: var(--cyan); font-size: 1.2rem; margin-bottom: 0.5rem; text-transform: uppercase;">Community Discord</h3>
+            <p style="font-size: 0.9rem; margin-bottom: 1rem;">Receive immediate support from over 15 active helpers.</p>
+            <a href="https://discord.gg/uPz5cgq4gr" target="_blank" class="btn btn-discord" style="width: 100%; padding: 0.6rem; font-size: 0.95rem;">Join Discord Helpdesk</a>
+          </div>
+
+          <div class="glass-panel" style="padding: 1.5rem;">
+            <h3 style="color: var(--cyan); font-size: 1.2rem; margin-bottom: 0.5rem; text-transform: uppercase;">Administrative Mail</h3>
+            <p style="font-size: 0.9rem; font-family: monospace; color: var(--muted);">admin@commonwealth legacyrp.com</p>
+          </div>
+        </div>
+
+        <!-- Sleek Contact Form Panel -->
+        <div class="glass-panel" style="padding: 3rem;">
+          <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--white);">Send a Message</h3>
+          <form onsubmit="handleContactSubmit(event)">
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Discord Name</label>
+                <input type="text" class="form-control" placeholder="e.g. trooper_miller" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" class="form-control" placeholder="e.g. miller@example.com" required>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Inquiry Department</label>
+              <select class="form-control" style="background-color: var(--surface-2);">
+                <option>Server Administration / Appeals</option>
+                <option>DOJ / Business Licensing</option>
+                <option>Media Partnerships / Streaming</option>
+                <option>Technical Bug Submissions</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Message Details</label>
+              <textarea class="form-control" placeholder="Explain your inquiry in detail..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.85rem; font-size: 1.1rem; margin-top: 1rem;">Send Inquiry Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Community Staff Roster Listing -->
+  <section class="section-spacer" style="background-color: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <div class="section-header" style="text-align: center; margin: 0 auto 5rem auto; max-width: 600px;">
+        <div class="section-label" style="justify-content: center;">THE TEAM</div>
+        <h2 class="section-title">Administrative Staff Roster</h2>
+        <p class="section-desc">Commonwealth Legacy RP is run by a dedicated team of mature developers, moderators, and community coordinators.</p>
+      </div>
+
+      <div class="grid grid-4" style="max-width: 1100px; margin: 0 auto;">
+        <!-- Staff 1 -->
+        <div class="glass-panel" style="text-align: center; padding: 2rem 1.5rem;">
+          <div style="width: 60px; height: 60px; background: rgba(0, 229, 255, 0.05); border: 1px solid var(--cyan); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem auto; font-family: var(--font-headings); font-size: 1.6rem; color: var(--cyan); text-transform: uppercase;">M</div>
+          <h3 style="font-size: 1.4rem; margin-bottom: 0.25rem;">Miller</h3>
+          <span class="badge badge-danger" style="font-size: 0.65rem;">Server Founder</span>
+        </div>
+
+        <!-- Staff 2 -->
+        <div class="glass-panel" style="text-align: center; padding: 2rem 1.5rem;">
+          <div style="width: 60px; height: 60px; background: rgba(0, 229, 255, 0.05); border: 1px solid var(--cyan); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem auto; font-family: var(--font-headings); font-size: 1.6rem; color: var(--cyan); text-transform: uppercase;">D</div>
+          <h3 style="font-size: 1.4rem; margin-bottom: 0.25rem;">Davis</h3>
+          <span class="badge badge-danger" style="font-size: 0.65rem;">Lead Developer</span>
+        </div>
+
+        <!-- Staff 3 -->
+        <div class="glass-panel" style="text-align: center; padding: 2rem 1.5rem;">
+          <div style="width: 60px; height: 60px; background: rgba(123, 92, 255, 0.05); border: 1px solid var(--violet); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem auto; font-family: var(--font-headings); font-size: 1.6rem; color: var(--violet); text-transform: uppercase;">C</div>
+          <h3 style="font-size: 1.4rem; margin-bottom: 0.25rem;">Clark</h3>
+          <span class="badge badge-update" style="font-size: 0.65rem;">Community Mgr</span>
+        </div>
+
+        <!-- Staff 4 -->
+        <div class="glass-panel" style="text-align: center; padding: 2rem 1.5rem;">
+          <div style="width: 60px; height: 60px; background: rgba(34, 197, 94, 0.05); border: 1px solid var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem auto; font-family: var(--font-headings); font-size: 1.6rem; color: var(--green); text-transform: uppercase;">A</div>
+          <h3 style="font-size: 1.4rem; margin-bottom: 0.25rem;">Adams</h3>
+          <span class="badge badge-success" style="font-size: 0.65rem;">Support Lead</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Submit script handler -->
+  <script>
+    function handleContactSubmit(event) {
+      event.preventDefault();
+      alert("Inquiry successfully logged. A community manager will contact you on Discord if necessary.");
+      event.target.reset();
+    }
+  </script>
+
+</body>
+</html>

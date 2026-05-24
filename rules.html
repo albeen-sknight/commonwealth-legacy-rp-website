@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Server Rules & Guidelines | Commonwealth Legacy RP</title>
+  <meta name="description" content="Review the serious roleplay rules and community guidelines for Commonwealth Legacy RP. Learn definitions for Metagaming, Powergaming, FailRP, and combat regulations.">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
+  <meta name="theme-color" content="#0A0D11">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/components.js" defer></script>
+  <script src="js/animations.js" defer></script>
+</head>
+<body>
+
+  <!-- Subpage Cinematic Hero -->
+  <section class="subpage-hero">
+    <div class="subpage-hero-overlay"></div>
+    <div class="container subpage-hero-container">
+      <div class="breadcrumbs">
+        <a href="index.html">Home</a> <span>/</span> Rules
+      </div>
+      <h1 class="subpage-title">Server Regulations</h1>
+      <p class="section-desc" style="max-width: 600px;">
+        Commonwealth Legacy RP is a serious roleplay environment. We hold our players to high standards of character immersion, fair play, and maturity. Review our regulations before applying.
+      </p>
+    </div>
+  </section>
+
+  <!-- Interactive Rules Index -->
+  <section class="section-spacer">
+    <div class="container" style="max-width: 900px;">
+      
+      <!-- Interactive Rule Search Bar -->
+      <div class="search-container">
+        <svg class="search-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        <input type="text" id="rules-search" class="search-input" placeholder="Search rules (e.g. metagaming, RDM, VDM)..." onkeyup="filterRules()">
+      </div>
+
+      <!-- Tab Buttons for Rule Sections -->
+      <div class="tabs-container">
+        <button class="tab-btn active" onclick="switchRulesTab('all', this)">All Rules</button>
+        <button class="tab-btn" onclick="switchRulesTab('general', this)">General RP</button>
+        <button class="tab-btn" onclick="switchRulesTab('violations', this)">RP Violations</button>
+        <button class="tab-btn" onclick="switchRulesTab('combat', this)">Combat Code</button>
+      </div>
+
+      <!-- Accordion Rules List -->
+      <div id="rules-accordion-list">
+        
+        <!-- Rule 1: General Serious RP -->
+        <div class="accordion-item" data-category="general">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <h3 class="accordion-title">1.1 Serious Roleplay Expectation</h3>
+            <svg class="accordion-icon" viewBox="0 0 24 24"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <p style="margin-bottom: 1rem;">All players must maintain character immersion at all times. Out-of-character (OOC) chat, voice, or behavior in-game is strictly prohibited. If an issue arises, play out the scenario and submit a staff ticket afterwards.</p>
+              <p style="color: var(--cyan); font-size: 0.85rem; font-weight: 700;">VALUABLE NOTE: Always prioritize the story over winning a scenario.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rule 2: Metagaming -->
+        <div class="accordion-item" data-category="violations">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <h3 class="accordion-title">2.1 Metagaming (Meta) Definition</h3>
+            <svg class="accordion-icon" viewBox="0 0 24 24"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <p>Metagaming is the act of using out-of-character information (obtained via Twitch streams, Discord, forums, or third-party sheets) within the in-game environment. Your character only knows what they have personally experienced, heard, or read inside the server grids.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rule 3: Powergaming -->
+        <div class="accordion-item" data-category="violations">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <h3 class="accordion-title">2.2 Powergaming (Power) Definition</h3>
+            <svg class="accordion-icon" viewBox="0 0 24 24"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <p>Powergaming is acting out scenarios that are physically impossible or giving yourself an unfair mechanical advantage that cannot be countered. Examples include: forcing actions on other players via <code>/me</code> commands without giving them a chance to react, spawning cars during active pursuits, or ignoring serious injuries.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rule 4: FearRP -->
+        <div class="accordion-item" data-category="general">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <h3 class="accordion-title">1.2 Fear Roleplay (FearRP)</h3>
+            <svg class="accordion-icon" viewBox="0 0 24 24"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <p>Your character's life is their most valuable asset. You must exhibit authentic fear when your life is under immediate threat (e.g., when a firearm is drawn and pointed at you at close range). Reaching for a weapon when already held at gunpoint is a violation of FearRP.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rule 5: VDM / RDM -->
+        <div class="accordion-item" data-category="combat">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <h3 class="accordion-title">3.1 Vehicle Deathmatch (VDM) & Random Deathmatch (RDM)</h3>
+            <svg class="accordion-icon" viewBox="0 0 24 24"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <p style="margin-bottom: 1rem;"><strong>VDM:</strong> Utilizing a vehicle as a physical weapon to ram, run over, or kill other players without substantial, pre-established roleplay reasons.</p>
+              <p><strong>RDM:</strong> Attacking or killing other players without a solid, verbal roleplay conflict leading up to the combat. Random violence is strictly bannable.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rule 6: Cop Baiting -->
+        <div class="accordion-item" data-category="combat">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <h3 class="accordion-title">3.2 Cop Baiting Regulations</h3>
+            <svg class="accordion-icon" viewBox="0 0 24 24"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <p>Purposely engaging in provocative behavior in front of law enforcement (e.g., drifting in front of state police stations, speeding back and forth, or honking continuously to force a vehicle pursuit) is prohibited. Pursuits must arise naturally from valid criminal storylines.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Accordion & Search Logic Script -->
+  <script>
+    function toggleAccordion(element) {
+      const item = element.parentElement;
+      const content = item.querySelector('.accordion-content');
+      
+      // Close other active accordion items
+      const activeItems = document.querySelectorAll('.accordion-item.active');
+      activeItems.forEach(ai => {
+        if (ai !== item) {
+          ai.classList.remove('active');
+          ai.querySelector('.accordion-content').style.maxHeight = null;
+        }
+      });
+
+      item.classList.toggle('active');
+
+      if (item.classList.contains('active')) {
+        content.style.maxHeight = content.scrollHeight + "px";
+      } else {
+        content.style.maxHeight = null;
+      }
+    }
+
+    function switchRulesTab(category, btnElement) {
+      // Manage active button class
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      btnElement.classList.add('active');
+
+      // Filter accordion items
+      const items = document.querySelectorAll('.accordion-item');
+      items.forEach(item => {
+        const itemCat = item.getAttribute('data-category');
+        if (category === 'all' || itemCat === category) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+        // Reset heights on filter
+        item.classList.remove('active');
+        item.querySelector('.accordion-content').style.maxHeight = null;
+      });
+    }
+
+    function filterRules() {
+      const query = document.getElementById('rules-search').value.toLowerCase();
+      const items = document.querySelectorAll('.accordion-item');
+      
+      items.forEach(item => {
+        const title = item.querySelector('.accordion-title').innerText.toLowerCase();
+        const content = item.querySelector('.accordion-body').innerText.toLowerCase();
+        
+        if (title.includes(query) || content.includes(query)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>

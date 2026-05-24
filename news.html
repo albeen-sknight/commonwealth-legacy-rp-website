@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News & Updates | Commonwealth Legacy RP</title>
+  <meta name="description" content="Read latest announcements, development changelogs, and community events on Commonwealth Legacy RP. Filter updates directly.">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
+  <meta name="theme-color" content="#0A0D11">
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Modal styles inline or overrides -->
+  <style>
+    /* News Modal styles */
+    .news-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(10, 13, 17, 0.95);
+      z-index: 5000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(15px);
+    }
+    .news-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .news-modal-content {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      width: 90%;
+      max-width: 800px;
+      max-height: 85vh;
+      border-radius: 12px;
+      overflow-y: auto;
+      position: relative;
+      animation: modalSlide 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+    }
+    @keyframes modalSlide {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .modal-close-btn {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--white);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+      z-index: 10;
+      transition: var(--transition);
+    }
+    .modal-close-btn:hover {
+      background: var(--red);
+      border-color: var(--red);
+      color: #050709;
+    }
+    .modal-body {
+      padding: 3rem;
+    }
+    .modal-header-img {
+      height: 300px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+      margin: -3rem -3rem 2rem -3rem;
+    }
+    .modal-header-img::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent 30%, var(--surface) 100%);
+    }
+  </style>
+
+  <script src="js/components.js" defer></script>
+  <script src="js/news-data.js" defer></script>
+  <script src="js/animations.js" defer></script>
+</head>
+<body>
+
+  <!-- Subpage Cinematic Hero -->
+  <section class="subpage-hero">
+    <div class="subpage-hero-overlay"></div>
+    <div class="container subpage-hero-container">
+      <div class="breadcrumbs">
+        <a href="index.html">Home</a> <span>/</span> News & Updates
+      </div>
+      <h1 class="subpage-title">State Updates</h1>
+      <p class="section-desc" style="max-width: 600px;">
+        Follow our progress. Review detailed development changelogs, official state announcements, and scheduled community events.
+      </p>
+    </div>
+  </section>
+
+  <!-- News Grid and Filtering -->
+  <section class="section-spacer">
+    <div class="container">
+      
+      <!-- Category Filter Tabs -->
+      <div class="tabs-container" style="margin-bottom: 4rem;">
+        <button class="tab-btn active" onclick="filterNews('all', this)">All Updates</button>
+        <button class="tab-btn" onclick="filterNews('Announcement', this)">Announcements</button>
+        <button class="tab-btn" onclick="filterNews('Feature', this)">Changelogs</button>
+        <button class="tab-btn" onclick="filterNews('Event', this)">Events</button>
+      </div>
+
+      <!-- Updates Grid -->
+      <div class="grid grid-3" id="news-catalog-grid">
+        <!-- Rendered dynamically from NewsData -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Dynamic News Detail Modal -->
+  <div class="news-modal" id="news-modal" onclick="closeNewsModal(event)">
+    <div class="news-modal-content">
+      <button class="modal-close-btn" onclick="closeNewsModal(null)">&times;</button>
+      <div class="modal-body" id="modal-body-content">
+        <!-- Injected dynamically on click -->
+      </div>
+    </div>
+  </div>
+
+  <!-- News Integration Logic Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      renderNews('all');
+      
+      // Support direct loading via URL parameter (e.g. news.html?id=1)
+      const urlParams = new URLSearchParams(window.location.search);
+      const articleId = urlParams.get('id');
+      if (articleId && typeof NewsData !== 'undefined') {
+        const item = NewsData.find(n => n.id == articleId);
+        if (item) {
+          setTimeout(() => {
+            openNewsArticle(item.id);
+          }, 300);
+        }
+      }
+    });
+
+    function renderNews(categoryFilter) {
+      const grid = document.getElementById('news-catalog-grid');
+      if (!grid || typeof NewsData === 'undefined') return;
+
+      grid.innerHTML = ''; // Clear
+
+      NewsData.forEach(item => {
+        if (categoryFilter !== 'all' && item.category !== categoryFilter) return;
+
+        const cardHTML = `
+          <div class="news-card" onclick="openNewsArticle(${item.id})">
+            <div class="news-card-image" style="background-image: url('${item.image}')">
+              <span class="badge ${item.badgeClass} news-badge">${item.category}</span>
+            </div>
+            <div class="news-content">
+              <div class="news-meta">
+                <span>${item.date}</span>
+                <span>By ${item.author}</span>
+              </div>
+              <h3 class="news-title">${item.title}</h3>
+              <p class="news-excerpt">${item.excerpt}</p>
+              <span class="news-read-more" style="cursor: pointer;">
+                Read Article ${SVGIcons.arrowRight}
+              </span>
+            </div>
+          </div>
+        `;
+        grid.insertAdjacentHTML('beforeend', cardHTML);
+      });
+    }
+
+    function filterNews(category, btnElement) {
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      btnElement.classList.add('active');
+      renderNews(category);
+    }
+
+    function openNewsArticle(id) {
+      const modal = document.getElementById('news-modal');
+      const body = document.getElementById('modal-body-content');
+      if (!modal || !body || typeof NewsData === 'undefined') return;
+
+      const item = NewsData.find(n => n.id === id);
+      if (!item) return;
+
+      body.innerHTML = `
+        <div class="modal-header-img" style="background-image: url('${item.image}')"></div>
+        <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem;">
+          <span class="badge ${item.badgeClass}">${item.category}</span>
+          <span style="font-size: 0.85rem; color: var(--muted);">${item.date} • By ${item.author}</span>
+        </div>
+        <h2 style="font-size: 2.5rem; line-height: 1.1; margin-bottom: 1.5rem; text-transform: uppercase;">${item.title}</h2>
+        <div style="font-size: 1rem; color: var(--muted); line-height: 1.7;">
+          ${item.content}
+        </div>
+      `;
+
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Lock background scroll
+    }
+
+    function closeNewsModal(event) {
+      // Close only if clicking close button, backdrop, or escape key
+      if (!event || event.target === document.getElementById('news-modal')) {
+        const modal = document.getElementById('news-modal');
+        if (modal) {
+          modal.classList.remove('active');
+          document.body.style.overflow = ''; // Unlock scroll
+        }
+      }
+    }
+  </script>
+
+</body>
+</html>

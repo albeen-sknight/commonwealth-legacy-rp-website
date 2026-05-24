@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frequently Asked Questions | Commonwealth Legacy RP</title>
+  <meta name="description" content="Find quick answers to common questions about Commonwealth Legacy RP whitelisting, in-game voice setup, stream guides, and server specs.">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
+  <meta name="theme-color" content="#0A0D11">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/components.js" defer></script>
+  <script src="js/animations.js" defer></script>
+</head>
+<body>
+
+  <!-- Subpage Cinematic Hero -->
+  <section class="subpage-hero">
+    <div class="subpage-hero-overlay"></div>
+    <div class="container subpage-hero-container">
+      <div class="breadcrumbs">
+        <a href="index.html">Home</a> <span>/</span> FAQ
+      </div>
+      <h1 class="subpage-title">FAQ Index</h1>
+      <p class="section-desc" style="max-width: 600px;">
+        Have a question about connecting, whitelisting, or setting up positional voice? Browse our indexed answers below or submit a support ticket in Discord.
+      </p>
+    </div>
+  </section>
+
+  <!-- Interactive FAQ List -->
+  <section class="section-spacer">
+    <div class="container" style="max-width: 900px;">
+      
+      <!-- Interactive Search -->
+      <div class="search-container">
+        <svg class="search-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        <input type="text" id="faq-search" class="search-input" placeholder="Search questions (e.g. whitelist, voice, stream)..." onkeyup="filterFaq()">
+      </div>
+
+      <!-- Accordion FAQ List -->
+      <div id="faq-accordion-list">
+        
+        <!-- Question 1 -->
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <h3 class="accordion-title">What is FiveM, and is GTA V required?</h3>
+            <svg class="accordion-icon" viewBox="0 0 24 24"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <p>FiveM is a custom, fully legal multiplayer modification framework for Grand Theft Auto V. Yes, you must have a legal, licensed copy of GTA V installed on your PC (Steam, Epic Games, or Rockstar launcher) to connect to our server. FiveM does not modify your core GTA files, so you will not be banned from GTA Online.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <h3 class="accordion-title">Does Commonwealth Legacy RP cost money to play?</h3>
+            <svg class="accordion-icon" viewBox="0 0 24 24"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <p>No. Commonwealth Legacy RP is 100% free to play. We do not sell in-game assets, vehicles, weapons, or properties for real-world money. We are fully funded by optional community server boost donations to secure high-performance host resources and custom asset models.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <h3 class="accordion-title">How long do whitelist applications take to review?</h3>
+            <svg class="accordion-icon" viewBox="0 0 24 24"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <p>Our dedicated application team reviews registrations continuously. Standard whitelisting applications are processed and graded within 12 hours of submittal. You will receive an automated notification directly on Discord indicating whether your application is approved or requires revision.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <h3 class="accordion-title">Am I allowed to stream my gameplay on Twitch or YouTube?</h3>
+            <svg class="accordion-icon" viewBox="0 0 24 24"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <p>Absolutely! We encourage content creators to stream their character storylines. However, you must adhere strictly to our Metagaming rules—reading chat messages containing on-stream server secrets or stream-sniping other active players is strictly bannable. We recommend setting a stream delay for tactical operations.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <h3 class="accordion-title">What voice system do we use, and is TeamSpeak required?</h3>
+            <svg class="accordion-icon" viewBox="0 0 24 24"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <p>No external software like TeamSpeak is required! We utilize the high-performance, native <strong>PMA-Voice</strong> system integrated directly into FiveM. It supports advanced 3D spatial audio, grid-based distance attenuation, environmental muffling, and fully encrypted dynamic radio frequencies for public service departments—all seamlessly configured within your standard GTA V game settings.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Accordion & Search Logic Script -->
+  <script>
+    function toggleAccordion(element) {
+      const item = element.parentElement;
+      const content = item.querySelector('.accordion-content');
+      
+      const activeItems = document.querySelectorAll('.accordion-item.active');
+      activeItems.forEach(ai => {
+        if (ai !== item) {
+          ai.classList.remove('active');
+          ai.querySelector('.accordion-content').style.maxHeight = null;
+        }
+      });
+
+      item.classList.toggle('active');
+
+      if (item.classList.contains('active')) {
+        content.style.maxHeight = content.scrollHeight + "px";
+      } else {
+        content.style.maxHeight = null;
+      }
+    }
+
+    function filterFaq() {
+      const query = document.getElementById('faq-search').value.toLowerCase();
+      const items = document.querySelectorAll('.accordion-item');
+      
+      items.forEach(item => {
+        const title = item.querySelector('.accordion-title').innerText.toLowerCase();
+        const content = item.querySelector('.accordion-body').innerText.toLowerCase();
+        
+        if (title.includes(query) || content.includes(query)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>

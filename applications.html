@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whitelisting Application | Commonwealth Legacy RP</title>
+  <meta name="description" content="Submit your serious roleplay whitelisting application for Commonwealth Legacy RP. Fill out Out-of-Character details, character backstories, and scenario questionnaires.">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
+  <meta name="theme-color" content="#0A0D11">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/components.js" defer></script>
+  <script src="js/animations.js" defer></script>
+  <script src="js/application-form.js" defer></script>
+</head>
+<body>
+
+  <!-- Subpage Cinematic Hero -->
+  <section class="subpage-hero">
+    <div class="subpage-hero-overlay"></div>
+    <div class="container subpage-hero-container">
+      <div class="breadcrumbs">
+        <a href="index.html">Home</a> <span>/</span> Applications
+      </div>
+      <h1 class="subpage-title">Application Portal</h1>
+      <p class="section-desc" style="max-width: 600px;">
+        Complete our serious roleplay whitelisting form. Select your sector interest to load context-specific scenario questions. Reviews take under 12 hours.
+      </p>
+    </div>
+  </section>
+
+  <!-- Wizard Application Container -->
+  <section class="section-spacer">
+    <div class="container" style="max-width: 800px;">
+      
+      <!-- Wizard Progress Header -->
+      <div class="wizard-header" id="app-wizard-header">
+        <div class="wizard-progress-line" id="wizard-progress-bar"></div>
+        <div class="wizard-step-node active" id="node-1">1</div>
+        <div class="wizard-step-node" id="node-2">2</div>
+        <div class="wizard-step-node" id="node-3">3</div>
+        <div class="wizard-step-node" id="node-4">4</div>
+        <div class="wizard-step-node" id="node-5">5</div>
+      </div>
+
+      <!-- Application Form Wizard Block -->
+      <div class="glass-panel" style="padding: 3rem; overflow: hidden; position: relative;">
+        <form id="whitelist-application-form" onsubmit="handleAppSubmit(event)">
+          
+          <!-- Step 1: Out-of-Character (OOC) Details -->
+          <div class="wizard-step-content active" id="step-1">
+            <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--cyan); border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">OOC Player Details</h3>
+            
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="ooc-discord">Discord Username</label>
+                <input type="text" id="ooc-discord" class="form-control" placeholder="e.g. trooper_miller" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ooc-age">Real Age (Must be 18+)</label>
+                <input type="number" id="ooc-age" class="form-control" placeholder="e.g. 24" min="15" required>
+                <span id="age-warning-alert" style="color: var(--gold); font-size: 0.75rem; font-weight: 600; display: none; margin-top: 0.25rem;">NOTE: Commonwealth Legacy RP requires high maturity. 18+ is strongly preferred.</span>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="ooc-timezone">Timezone Grid</label>
+                <select id="ooc-timezone" class="form-control" style="background-color: var(--surface-2);">
+                  <option>US Eastern (EST/EDT)</option>
+                  <option>US Central (CST/CDT)</option>
+                  <option>US Pacific (PST/PDT)</option>
+                  <option>Greenwich Mean Time (GMT/UTC)</option>
+                  <option>Australian Eastern (AEST)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ooc-hours">Availability (Hours/Week)</label>
+                <input type="number" id="ooc-hours" class="form-control" placeholder="e.g. 15" min="1" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2: In-Character (IC) Profile -->
+          <div class="wizard-step-content" id="step-2">
+            <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--cyan); border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">In-Character Profile</h3>
+            
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="ic-name">Planned Character Name</label>
+                <input type="text" id="ic-name" class="form-control" placeholder="e.g. James Miller" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ic-interest">Department / Career Path Focus</label>
+                <select id="ic-interest" class="form-control" style="background-color: var(--surface-2);" onchange="updateScenarioQuestions()">
+                  <option value="civilian">Civilian Jobs & Underworld Progression</option>
+                  <option value="police">Virginia State Police (VSP / VBSO)</option>
+                  <option value="ems">Virginia Emergency Medical (VEMS)</option>
+                  <option value="doj">Department of Justice (Attorney / Judge)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group full-width">
+              <label class="form-label" for="ic-backstory">Character Backstory & Motivation (Min. 100 Words)</label>
+              <textarea id="ic-backstory" class="form-control" placeholder="Draft your character's backstory, their financial motives, legal limits, and career goals inside the Commonwealth..." required></textarea>
+              <div id="word-count-badge" style="font-size: 0.75rem; color: var(--muted); text-align: right; margin-top: 0.25rem;">Word Count: 0 / 100</div>
+            </div>
+          </div>
+
+          <!-- Step 3: Dynamic Sector Scenario Questions -->
+          <div class="wizard-step-content" id="step-3">
+            <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--cyan); border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">Roleplay Scenarios</h3>
+            <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 1.5rem;">These questions change dynamically based on your chosen career path from the previous step.</p>
+
+            <div id="dynamic-scenarios-container">
+              <!-- Injected by js/application-form.js based on selected sector -->
+            </div>
+          </div>
+
+          <!-- Step 4: Server Rules & Affirmation Checklist -->
+          <div class="wizard-step-content" id="step-4">
+            <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--cyan); border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">Rules Affirmation</h3>
+            
+            <div class="form-checkbox-group" onclick="toggleCheckbox('check-etiquette')">
+              <input type="checkbox" id="check-etiquette" class="form-checkbox" required>
+              <div class="form-checkbox-label">
+                I understand that Commonwealth Legacy RP is a <strong>serious roleplay community</strong>. I agree to maintain character immersion at all times and avoid OOC toxic conduct under penalty of administrative ban.
+              </div>
+            </div>
+
+            <div class="form-checkbox-group" onclick="toggleCheckbox('check-metagaming')">
+              <input type="checkbox" id="check-metagaming" class="form-checkbox" required>
+              <div class="form-checkbox-label">
+                I understand the definitions of <strong>Metagaming</strong> and <strong>Powergaming</strong>. I agree to play out all roleplay scenarios naturally, prioritizing the story outcomes over winning the scene.
+              </div>
+            </div>
+
+            <div class="form-checkbox-group" onclick="toggleCheckbox('check-voice')">
+              <input type="checkbox" id="check-voice" class="form-checkbox" required>
+              <div class="form-checkbox-label">
+                I agree to enable the native <strong>FiveM Voice Chat (PMA-Voice)</strong> inside my game settings prior to connecting. I understand that a functional microphone and positional voice are mandatory for roleplay.
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 5: Submission & Percentage Processing -->
+          <div class="wizard-step-content" id="step-5">
+            <div id="submission-loader" style="text-align: center; padding: 4rem 2rem;">
+              <div class="preloader-beacon" style="margin: 0 auto 2rem auto; width: 80px; height: 80px;">
+                <!-- Reused dynamic preloader beacon SVG from components.js inside script -->
+                <div id="wizard-beacon-placeholder"></div>
+              </div>
+              <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Transmitting Application Data...</h3>
+              <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 1.5rem;">Hashing background profile and syncing Discord grids.</p>
+              <div class="status-progress-bar" style="max-width: 400px; margin: 0 auto;">
+                <div class="status-progress-fill" id="submission-progress-fill" style="width: 0%;"></div>
+              </div>
+              <div id="submission-percent" style="font-family: monospace; font-size: 1rem; color: var(--cyan); margin-top: 0.5rem; font-weight: 700;">0%</div>
+            </div>
+
+            <!-- Success screen state hidden initially -->
+            <div id="submission-success" class="success-screen" style="display: none;">
+              <div class="success-icon-wrapper" id="success-icon-box"></div>
+              <h2 style="font-size: 2.2rem; margin-bottom: 1rem; text-transform: uppercase;">Verification Received</h2>
+              <p style="color: var(--muted); font-size: 1rem; max-width: 500px; margin: 0 auto 2.5rem auto;">
+                Your background profile and roleplay scenario answers have been securely synced to our application database. Reviews take under 12 hours.
+              </p>
+              <div style="display: flex; gap: 1.5rem; justify-content: center;">
+                <a href="index.html" class="btn btn-secondary">Return Home</a>
+                <a href="https://discord.gg/uPz5cgq4gr" target="_blank" class="btn btn-discord">
+                  Open Discord
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="wizard-actions" id="app-wizard-actions">
+            <button type="button" class="btn btn-secondary" id="btn-prev" onclick="changeStep(-1)" style="visibility: hidden;">Back Step</button>
+            <button type="button" class="btn btn-primary" id="btn-next" onclick="changeStep(1)">Next Step</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

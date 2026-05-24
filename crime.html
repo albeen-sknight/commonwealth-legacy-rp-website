@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crime & Justice | Commonwealth Legacy RP</title>
+  <meta name="description" content="Explore underworld progression paths and criminal justice on Commonwealth Legacy RP. Racing circuits, synthesis trade, heists, court defense, and jail systems.">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
+  <meta name="theme-color" content="#0A0D11">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/components.js" defer></script>
+  <script src="js/animations.js" defer></script>
+</head>
+<body>
+
+  <!-- Subpage Cinematic Hero with subtle Violet DOJ Accent -->
+  <section class="subpage-hero theme-doj">
+    <div class="subpage-hero-overlay"></div>
+    <div class="container subpage-hero-container">
+      <div class="breadcrumbs">
+        <a href="index.html">Home</a> <span>/</span> <a href="#">Features</a> <span>/</span> Crime & Justice
+      </div>
+      <h1 class="subpage-title">Underworld & Order</h1>
+      <p class="section-desc" style="max-width: 600px;">
+        Risk versus Reward. Navigate the state's illicit operations, manage street reputation, and prepare for legal defense in active courthouse proceedings.
+      </p>
+    </div>
+  </section>
+
+  <!-- Risk vs Reward Overview -->
+  <section class="section-spacer">
+    <div class="container">
+      <div class="grid grid-2" style="align-items: center; margin-bottom: 5rem;">
+        <div>
+          <div class="section-label">THE LEGAL GRID</div>
+          <h2 class="section-title" style="font-size: 2.2rem; margin-bottom: 1.5rem;">A Living System of Law & Consequences</h2>
+          <p style="margin-bottom: 1.5rem; font-size: 1.05rem;">
+            On Commonwealth Legacy RP, illegal progression is structured with substantial depth. Every crime carries forensic trails—fingerprints, spent ammunition shells, and dynamic visual evidence that VSP detectives use to trace operations.
+          </p>
+          <p style="color: var(--muted); font-size: 0.95rem;">
+            If caught, players enter a robust, serious legal pipeline. You have the right to request active defense counsel, litigate case details in front of Magistrate Judges, or negotiate plea balances. No instant jail warps—actual legal trials.
+          </p>
+        </div>
+        <div class="glass-panel theme-doj" style="padding: 2.5rem;">
+          <h3 style="font-size: 1.5rem; color: var(--violet); margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">THE PENAL CODE MATRIX</h3>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem; padding-left: 0; font-size: 0.9rem; color: var(--muted);">
+            <li><strong style="color: var(--white);">Arrest Registry:</strong> <span style="font-size: 0.85rem;">Officers catalog files directly into the in-game MDT. Warrants remain active until served.</span></li>
+            <li><strong style="color: var(--white);">Jail Booking:</strong> <span style="font-size: 0.85rem;">Administered by VBSO at the local facility. Options to perform labor to shorten sentences.</span></li>
+            <li><strong style="color: var(--white);">Record Expungement:</strong> <span style="font-size: 0.85rem;">Clean your background profile by filing civil petitions through licensed DOJ attorneys.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Underworld Operations Grid -->
+  <section class="section-spacer" style="background-color: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <div class="section-header" style="text-align: center; margin: 0 auto 5rem auto; max-width: 600px;">
+        <div class="section-label" style="justify-content: center;">ILLICIT PATHWAYS</div>
+        <h2 class="section-title">Underworld System Features</h2>
+        <p class="section-desc">We feature fully unique criminal loops designed to challenge your crew's coordination and tactical execution under pressure.</p>
+      </div>
+
+      <div class="grid grid-3">
+        <!-- Crime 1 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper" id="crime-heist-icon" style="color: var(--violet); border-color: rgba(123, 92, 255, 0.2);"></div>
+          <h3 class="feature-title">High-Risk Heists</h3>
+          <p class="feature-desc">Plan bank vaults, jewelry cases, or train shipments. Crack security terminals, disable camera nets, and coordinate active getaway drivers.</p>
+        </div>
+
+        <!-- Crime 2 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper" id="crime-syn-icon" style="color: var(--violet); border-color: rgba(123, 92, 255, 0.2);"></div>
+          <h3 class="feature-title">Contraband Synthetics</h3>
+          <p class="feature-desc">Harvest raw materials, refine chemical formulas in hidden laboratories, and run strategic distribution networks across rival turf grids.</p>
+        </div>
+
+        <!-- Crime 3 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper" id="crime-race-icon" style="color: var(--violet); border-color: rgba(123, 92, 255, 0.2);"></div>
+          <h3 class="feature-title">Street Racing Circuits</h3>
+          <p class="feature-desc">Operate in illegal midnight racing hubs. Create customized tracks, bet clean cryptocurrency, and purchase black-market ECU engine modifiers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Script for Icons -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const crimeIcons = {
+        'crime-heist-icon': `<svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>`,
+        'crime-syn-icon': `<svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>`,
+        'crime-race-icon': `<svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42.99L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/></svg>`
+      };
+
+      for (const [id, svg] of Object.entries(crimeIcons)) {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = svg;
+      }
+    });
+  </script>
+
+</body>
+</html>
