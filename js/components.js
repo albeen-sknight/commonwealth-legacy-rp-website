@@ -144,14 +144,10 @@ function injectHeader() {
           <li class="nav-item">
             <a href="${pathPrefix}index.html" class="nav-link">Home</a>
           </li>
-          
-          <li class="nav-item">
-            <a href="${pathPrefix}join.html" class="nav-link">How to Join</a>
-          </li>
 
           <!-- Departments Dropdown -->
           <li class="nav-item">
-            <a href="${pathPrefix}departments.html" class="nav-link">
+            <a href="${pathPrefix}departments.html" class="nav-link" onclick="if(window.innerWidth > 1024) return true; else return false;">
               Departments ${SVGIcons.chevron}
             </a>
             <ul class="nav-dropdown">
@@ -182,10 +178,6 @@ function injectHeader() {
             </ul>
           </li>
 
-          <li class="nav-item">
-            <a href="${pathPrefix}rules.html" class="nav-link">Rules</a>
-          </li>
-
           <!-- Community Dropdown -->
           <li class="nav-item">
             <a href="#" class="nav-link" onclick="return false;">
@@ -193,56 +185,63 @@ function injectHeader() {
             </a>
             <ul class="nav-dropdown">
               <li>
-                <a href="${pathPrefix}jobs.html" class="nav-dropdown-link">
-                  <span class="dropdown-title">Jobs & Economy</span>
-                  <span class="dropdown-desc">Legal paths & progression</span>
-                </a>
-              </li>
-              <li>
-                <a href="${pathPrefix}housing.html" class="nav-dropdown-link">
-                  <span class="dropdown-title">Housing & Vehicles</span>
-                  <span class="dropdown-desc">Custom properties & imports</span>
-                </a>
-              </li>
-              <li>
-                <a href="${pathPrefix}businesses.html" class="nav-dropdown-link">
-                  <span class="dropdown-title">Player Businesses</span>
-                  <span class="dropdown-desc">Licenses, storefronts & trades</span>
-                </a>
-              </li>
-              <li>
-                <a href="${pathPrefix}crime.html" class="nav-dropdown-link">
-                  <span class="dropdown-title">Crime & Justice</span>
-                  <span class="dropdown-desc">Underworld, risks & court law</span>
-                </a>
-              </li>
-              <li>
-                <a href="${pathPrefix}faq.html" class="nav-dropdown-link">
-                  <span class="dropdown-title">FAQ Index</span>
-                  <span class="dropdown-desc">Answers to common questions</span>
+                <a href="${pathPrefix}join.html" class="nav-dropdown-link">
+                  <span class="dropdown-title">Start Story</span>
+                  <span class="dropdown-desc">Join walkthrough checklist</span>
                 </a>
               </li>
               <li>
                 <a href="${pathPrefix}applications.html" class="nav-dropdown-link">
                   <span class="dropdown-title">Applications</span>
-                  <span class="dropdown-desc">Join our departments or staff</span>
+                  <span class="dropdown-desc">Whitelist application portal</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://discord.gg/uPz5cgq4gr" target="_blank" class="nav-dropdown-link">
+                  <span class="dropdown-title">Discord Server</span>
+                  <span class="dropdown-desc">Connect with our active players</span>
                 </a>
               </li>
               <li>
                 <a href="${pathPrefix}contact.html" class="nav-dropdown-link">
-                  <span class="dropdown-title">Socials & Team</span>
-                  <span class="dropdown-desc">Contact staff & join social channels</span>
+                  <span class="dropdown-title">Contact & Staff</span>
+                  <span class="dropdown-desc">Roster, support & tickets</span>
                 </a>
               </li>
             </ul>
           </li>
 
+          <!-- Information Dropdown -->
           <li class="nav-item">
-            <a href="${pathPrefix}news.html" class="nav-link">News</a>
-          </li>
-
-          <li class="nav-item">
-            <a href="${pathPrefix}status.html" class="nav-link">Status</a>
+            <a href="#" class="nav-link" onclick="return false;">
+              Information ${SVGIcons.chevron}
+            </a>
+            <ul class="nav-dropdown">
+              <li>
+                <a href="${pathPrefix}rules.html" class="nav-dropdown-link">
+                  <span class="dropdown-title">Server Rules</span>
+                  <span class="dropdown-desc">Immersion, powergaming, FearRP rules</span>
+                </a>
+              </li>
+              <li>
+                <a href="${pathPrefix}faq.html" class="nav-dropdown-link">
+                  <span class="dropdown-title">FAQ Index</span>
+                  <span class="dropdown-desc">Frequently asked questions</span>
+                </a>
+              </li>
+              <li>
+                <a href="${pathPrefix}status.html" class="nav-dropdown-link">
+                  <span class="dropdown-title">Server Status</span>
+                  <span class="dropdown-desc">Build version & developer notes</span>
+                </a>
+              </li>
+              <li>
+                <a href="${pathPrefix}news.html" class="nav-dropdown-link">
+                  <span class="dropdown-title">News & Updates</span>
+                  <span class="dropdown-desc">Latest changelogs & community posts</span>
+                </a>
+              </li>
+            </ul>
           </li>
 
           <li class="nav-header-cta">
@@ -252,17 +251,90 @@ function injectHeader() {
           </li>
         </ul>
 
-        <!-- Mobile Nav Toggle -->
-        <button class="mobile-nav-toggle" id="mobile-toggle" aria-label="Toggle Navigation">
-          <span></span>
-          <span></span>
-          <span></span>
+        <!-- Hamburger Menu Drawer Button -->
+        <button class="menu-drawer-toggle" id="menu-drawer-btn" aria-expanded="false" aria-label="Toggle Side Navigation Menu">
+          <span class="menu-toggle-text">Menu</span>
+          <div class="menu-toggle-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </button>
       </div>
     </header>
   `;
 
   document.body.insertAdjacentHTML('afterbegin', headerHTML);
+
+  // Inject Rockstar-inspired expandable Side Drawer Menu overlay markup
+  const drawerHTML = `
+    <div id="side-menu-drawer" class="side-drawer" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="drawer-overlay" id="drawer-overlay-dim"></div>
+      <div class="drawer-content">
+        <div class="drawer-header">
+          <a href="${pathPrefix}index.html" class="logo">
+            <div class="logo-beacon">${SVGIcons.beacon}</div>
+            <div class="logo-text">
+              <span class="logo-main">COMMONWEALTH</span>
+              <span class="logo-sub">Virginia Roleplay</span>
+            </div>
+          </a>
+          <button class="drawer-close" id="drawer-close-btn" aria-label="Close menu">&times;</button>
+        </div>
+        
+        <div class="drawer-body">
+          <nav class="drawer-nav">
+            <div class="drawer-section">
+              <h4 class="drawer-section-title">Main</h4>
+              <ul class="drawer-links">
+                <li><a href="${pathPrefix}index.html">Home</a></li>
+                <li><a href="${pathPrefix}join.html">How to Join</a></li>
+                <li><a href="${pathPrefix}applications.html">Applications Portal</a></li>
+                <li><a href="${pathPrefix}status.html">Server Status</a></li>
+                <li><a href="${pathPrefix}news.html">News & Updates</a></li>
+              </ul>
+            </div>
+            
+            <div class="drawer-section">
+              <h4 class="drawer-section-title">Roleplay Systems</h4>
+              <ul class="drawer-links">
+                <li><a href="${pathPrefix}jobs.html">Civilian Jobs</a></li>
+                <li><a href="${pathPrefix}housing.html">Housing & Vehicles</a></li>
+                <li><a href="${pathPrefix}businesses.html">Player Businesses</a></li>
+                <li><a href="${pathPrefix}crime.html">Crime & Justice</a></li>
+                <li><a href="${pathPrefix}rules.html">Server Rules</a></li>
+                <li><a href="${pathPrefix}faq.html">FAQ Index</a></li>
+              </ul>
+            </div>
+            
+            <div class="drawer-section">
+              <h4 class="drawer-section-title">Departments</h4>
+              <ul class="drawer-links">
+                <li><a href="${pathPrefix}vsp.html">Virginia State Police</a></li>
+                <li><a href="${pathPrefix}vbso.html">Virginia Beach Sheriff</a></li>
+                <li><a href="${pathPrefix}vems.html">Virginia Emergency Medical</a></li>
+                <li><a href="${pathPrefix}doj.html">Department of Justice</a></li>
+              </ul>
+            </div>
+            
+            <div class="drawer-section">
+              <h4 class="drawer-section-title">Community</h4>
+              <ul class="drawer-links">
+                <li><a href="https://discord.gg/uPz5cgq4gr" target="_blank">Discord Server</a></li>
+                <li><a href="${pathPrefix}contact.html">Contact Staff</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+        
+        <div class="drawer-footer">
+          <span class="drawer-status-pill">In Development / Private Testing</span>
+          <p class="drawer-copyright">&copy; 2026 Commonwealth Legacy RP. Law &bull; Life &bull; Legacy</p>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.insertAdjacentHTML('beforeend', drawerHTML);
 }
 
 // 3. Inject Global Footer
@@ -353,13 +425,15 @@ function injectFooter() {
   document.body.insertAdjacentHTML('beforeend', footerHTML);
 }
 
-// 4. Handle Sticky Navigation Scroll States & Mobile toggles
+// 4. Handle Sticky Navigation Scroll States, Menu Drawer events, Lightbox modallers
 function setupNavEvents() {
   const header = document.getElementById('main-header');
-  const toggle = document.getElementById('mobile-toggle');
-  const menu = document.getElementById('nav-menu');
+  const drawerBtn = document.getElementById('menu-drawer-btn');
+  const drawer = document.getElementById('side-menu-drawer');
+  const drawerCloseBtn = document.getElementById('drawer-close-btn');
+  const drawerOverlay = document.getElementById('drawer-overlay-dim');
 
-  // Sticky header on scroll
+  // Sticky header background transition
   window.addEventListener('scroll', () => {
     if (window.scrollY > 20) {
       header.classList.add('scrolled');
@@ -368,37 +442,93 @@ function setupNavEvents() {
     }
   });
 
-  // Mobile Drawer Toggle
-  if (toggle && menu) {
-    toggle.addEventListener('click', (e) => {
+  // Focus trap accessibility helper
+  const focusTrap = (element) => {
+    const focusableElements = element.querySelectorAll('a[href], button, textarea, input, select');
+    if (!focusableElements.length) return;
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    element.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab') {
+        if (e.shiftKey) { // Shift + Tab
+          if (document.activeElement === firstElement) {
+            lastElement.focus();
+            e.preventDefault();
+          }
+        } else { // Tab
+          if (document.activeElement === lastElement) {
+            firstElement.focus();
+            e.preventDefault();
+          }
+        }
+      }
+    });
+  };
+
+  // Open Drawer Menu
+  const openDrawer = () => {
+    if (!drawer) return;
+    drawer.classList.add('active');
+    drawer.setAttribute('aria-hidden', 'false');
+    drawerBtn.classList.add('active');
+    drawerBtn.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('menu-open');
+    focusTrap(drawer);
+    drawerCloseBtn.focus();
+    document.addEventListener('keydown', handleDrawerKeyDown);
+  };
+
+  // Close Drawer Menu
+  const closeDrawer = () => {
+    if (!drawer) return;
+    drawer.classList.remove('active');
+    drawer.setAttribute('aria-hidden', 'true');
+    drawerBtn.classList.remove('active');
+    drawerBtn.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('menu-open');
+    document.removeEventListener('keydown', handleDrawerKeyDown);
+    drawerBtn.focus();
+  };
+
+  const handleDrawerKeyDown = (e) => {
+    if (e.key === 'Escape') closeDrawer();
+  };
+
+  if (drawerBtn && drawer) {
+    drawerBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      toggle.classList.toggle('active');
-      menu.classList.toggle('active');
+      if (drawer.classList.contains('active')) {
+        closeDrawer();
+      } else {
+        openDrawer();
+      }
     });
 
-    // Handle nested mobile accordion navigation clicks
-    const linksWithDropdowns = menu.querySelectorAll('.nav-link');
-    linksWithDropdowns.forEach(link => {
-      const dropdown = link.nextElementSibling;
-      if (dropdown && dropdown.classList.contains('nav-dropdown')) {
-        link.addEventListener('click', (e) => {
-          if (window.innerWidth <= 1024) {
-            e.preventDefault();
-            const parent = link.parentElement;
-            parent.classList.toggle('active');
-          }
+    if (drawerCloseBtn) drawerCloseBtn.addEventListener('click', closeDrawer);
+    if (drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer);
+  }
+
+  // Handle nested desktop dropdown keyboard focus accessibilities
+  const dropdownItems = document.querySelectorAll('.nav-menu > li');
+  dropdownItems.forEach(item => {
+    const link = item.querySelector('.nav-link');
+    const dropdown = item.querySelector('.nav-dropdown');
+    if (link && dropdown) {
+      link.addEventListener('focus', () => {
+        item.classList.add('focus-active');
+      });
+      
+      const dropdownLinks = dropdown.querySelectorAll('a');
+      const lastDropdownLink = dropdownLinks[dropdownLinks.length - 1];
+      
+      if (lastDropdownLink) {
+        lastDropdownLink.addEventListener('blur', () => {
+          item.classList.remove('focus-active');
         });
       }
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (menu.classList.contains('active') && !menu.contains(e.target) && !toggle.contains(e.target)) {
-        toggle.classList.remove('active');
-        menu.classList.remove('active');
-      }
-    });
-  }
+    }
+  });
 }
 
 // 5. Active Link Highlighting
@@ -414,4 +544,78 @@ function highlightActiveLink() {
       link.style.fontWeight = '700';
     }
   });
+
+  const drawerLinks = document.querySelectorAll('.drawer-links a');
+  drawerLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === page || (page === '' && href === 'index.html')) {
+      link.classList.add('is-active');
+    }
+  });
 }
+
+// Dynamic Video Modal Lightbox (supporting YouTube nocookie and local video fallback)
+function openTrailerModal(videoId) {
+  const video = (typeof videoLibrary !== 'undefined' && videoLibrary[videoId]) || 
+                (typeof localVideoPlaceholders !== 'undefined' && localVideoPlaceholders[videoId]) || {
+    title: 'Commonwealth Legacy RP — Official Showcase',
+    youtubeId: '9DxyS9PBKKM',
+    purpose: 'A Virginia-based FiveM roleplay community built around law, life, and legacy.'
+  };
+
+  const embedUrl = video.youtubeId
+    ? `https://www.youtube-nocookie.com/embed/${video.youtubeId}?autoplay=1&rel=0&modestbranding=1`
+    : video.placement; // if local mp4
+
+  const isLocal = !video.youtubeId;
+
+  let modalContent = '';
+  if (isLocal) {
+    modalContent = `<video src="${embedUrl}" controls autoplay class="lightbox-video"></video>`;
+  } else {
+    modalContent = `<iframe src="${embedUrl}" title="${video.title}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+  }
+
+  const modalHTML = `
+    <div id="video-lightbox" class="lightbox-overlay" role="dialog" aria-modal="true" aria-label="${video.title}">
+      <div class="lightbox-container">
+        <button class="lightbox-close" aria-label="Close video">&times;</button>
+        <div class="lightbox-video-wrapper">
+          ${modalContent}
+        </div>
+        <div class="lightbox-details">
+          <h3>${video.title}</h3>
+          <p>${video.purpose || 'Official Commonwealth Showcase'}</p>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.body.insertAdjacentHTML('beforeend', modalHTML);
+  document.body.classList.add('modal-open');
+
+  const modal = document.getElementById('video-lightbox');
+  const closeBtn = modal.querySelector('.lightbox-close');
+
+  const closeModal = () => {
+    modal.classList.add('fade-out');
+    setTimeout(() => {
+      modal.remove();
+      document.body.classList.remove('modal-open');
+    }, 300);
+    document.removeEventListener('keydown', handleKeyDown);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Escape') closeModal();
+  };
+
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal || e.target.classList.contains('lightbox-container')) closeModal();
+  });
+  document.addEventListener('keydown', handleKeyDown);
+}
+
+// Expose globally
+window.openTrailerModal = openTrailerModal;

@@ -26,52 +26,57 @@
   <script src="js/video-library.js" defer></script>
   <script src="js/cinematic-story.js" defer></script>
   <script src="js/animations.js" defer></script>
+  <script src="js/gallery.js" defer></script>
 </head>
 <body>
   <main class="cinematic-page" id="top">
+    <!-- Chapter Side Scroll Navigation -->
     <nav class="chapter-indicator" aria-label="Homepage chapters">
       <a href="#enter" data-chapter-link="enter"><span>01</span>Enter</a>
       <a href="#paths" data-chapter-link="paths"><span>02</span>Paths</a>
       <a href="#departments" data-chapter-link="departments"><span>03</span>Departments</a>
       <a href="#life" data-chapter-link="life"><span>04</span>Life</a>
-      <a href="#justice" data-chapter-link="justice"><span>05</span>Justice</a>
-      <a href="#status" data-chapter-link="status"><span>06</span>Status</a>
-      <a href="#join" data-chapter-link="join"><span>07</span>Join</a>
+      <a href="#explore" data-chapter-link="explore"><span>05</span>Explore</a>
+      <a href="#justice" data-chapter-link="justice"><span>06</span>Consequences</a>
+      <a href="#showcases" data-chapter-link="showcases"><span>07</span>Showcases</a>
+      <a href="#gallery" data-chapter-link="gallery"><span>08</span>Gallery</a>
+      <a href="#status" data-chapter-link="status"><span>09</span>Status</a>
+      <a href="#join" data-chapter-link="join"><span>10</span>Join</a>
     </nav>
 
+    <!-- CHAPTER 01: Enter the Commonwealth (Title Reveal Opening) -->
     <section class="story-chapter story-hero chapter-active" id="enter" data-chapter="enter">
       <div class="chapter-media" data-local-video="assets/video/hero-commonwealth.mp4">
         <img class="story-image" src="https://images.unsplash.com/photo-1523540939399-141cbff6a8d7?q=80&w=1800&auto=format&fit=crop" alt="Cinematic Virginia road at dusk" loading="eager">
       </div>
-      <div class="container story-grid">
-        <div class="chapter-content">
-          <p class="chapter-kicker reveal-story">Chapter 1 / Enter the Commonwealth</p>
-          <h1 class="chapter-title reveal-story">Shape Your Legacy <span>in the Commonwealth.</span></h1>
-          <p class="chapter-copy reveal-story">A serious FiveM roleplay community built on realism, opportunity, and respect. Commonwealth Virginia Roleplay. Law. Life. Legacy.</p>
-          <div class="chapter-actions reveal-story">
-            <a class="btn btn-primary" href="https://discord.gg/uPz5cgq4gr" target="_blank" rel="noopener">Join Discord</a>
+      <div class="container hero-story-container">
+        <div class="hero-reveal-block">
+          <span class="hero-status-badge reveal-hero-item">In Development / Private Testing</span>
+          <h1 class="hero-title reveal-hero-item">
+            <span class="hero-logo-main">COMMONWEALTH</span>
+            <span class="hero-logo-highlight">LEGACY RP</span>
+            <span class="hero-logo-sub">Commonwealth Virginia Roleplay</span>
+          </h1>
+          <p class="hero-motto reveal-hero-item">Law &bull; Life &bull; Legacy</p>
+          <h2 class="hero-headline reveal-hero-item">Shape Your Legacy <span>in the Commonwealth.</span></h2>
+          <div class="hero-actions reveal-hero-item">
+            <a class="btn btn-primary btn-shine" href="https://discord.gg/uPz5cgq4gr" target="_blank" rel="noopener">
+              <span class="btn-icon" style="width: 18px; height: 18px; display: inline-flex; align-items: center;">
+                <svg viewBox="0 0 127.14 96.36" fill="currentColor"><path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a77.7,77.7,0,0,0,6.63-10.85,68.43,68.43,0,0,1-10.5-5c.88-.65,1.72-1.34,2.51-2a75.58,75.58,0,0,0,73,0c.8.69,1.63,1.38,2.51,2a68.61,68.61,0,0,1-10.5,5,78.37,78.37,0,0,0,6.63,10.85,105.73,105.73,0,0,0,31.58-18.83C129.24,48.24,123.39,25.43,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.83,46,53.83,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.07,46,96.07,53,91,65.69,84.69,65.69Z"/></svg>
+              </span> Join Discord
+            </a>
             <a class="btn btn-secondary" href="join.html">Start Your Story</a>
-          </div>
-          <div class="story-meta-strip reveal-story" aria-label="Server highlights">
-            <span>In Development / Private Testing</span>
-            <span>Native FiveM / PMA-Voice only</span>
-            <span>No TeamSpeak. No SaltyChat.</span>
+            <button class="btn btn-secondary btn-shine" onclick="openTrailerModal('virginiaDrone')">Watch Trailer</button>
           </div>
         </div>
-        <aside class="cinematic-video-card youtube-card reveal-story" data-youtube-id="9DxyS9PBKKM" data-video-title="Virginia 4K Drone Footage | Cinematic Aerial Views" data-credit="Placeholder reference. Replace with owned or licensed footage before production.">
-          <button class="youtube-thumb" type="button" aria-label="Play Virginia atmosphere video">
-            <img src="https://img.youtube.com/vi/9DxyS9PBKKM/sddefault.jpg" alt="Virginia cinematic drone footage thumbnail" loading="lazy">
-            <span class="play-button" aria-hidden="true"></span>
-          </button>
-          <div class="youtube-card-copy">
-            <strong>Commonwealth Atmosphere</strong>
-            <span>Virginia 4K Drone Footage | Cinematic Aerial Views</span>
-            <small>Source: YouTube placeholder reference. Replace later.</small>
-          </div>
-        </aside>
+        <div class="scroll-more-indicator">
+          <span>Scroll to Enter</span>
+          <div class="scroll-arrow"></div>
+        </div>
       </div>
     </section>
 
+    <!-- CHAPTER 02: Choose Your Path (Cinematic Character Role Cards) -->
     <section class="story-chapter story-paths" id="paths" data-chapter="paths">
       <div class="chapter-media">
         <img class="story-image" src="https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1800&auto=format&fit=crop" alt="Virginia neighborhood and street atmosphere" loading="lazy">
@@ -80,28 +85,106 @@
         <div class="chapter-content chapter-content-wide">
           <p class="chapter-kicker reveal-story">Chapter 2 / Choose Your Path</p>
           <h2 class="chapter-title reveal-story">Law. Life. <span>Legacy.</span></h2>
-          <p class="chapter-copy reveal-story">Start small, earn trust, and let your choices decide what the Commonwealth remembers.</p>
+          <p class="chapter-copy reveal-story">Start small, earn trust, and let your choices decide what the Commonwealth remembers. Select your focus and define your identity.</p>
         </div>
-        <div class="path-card-grid stagger-story">
-          <a href="jobs.html" class="story-card" data-stagger><span>Civilian</span><p>Work, socialize, build reputation, and become part of daily life.</p></a>
-          <a href="businesses.html" class="story-card" data-stagger><span>Business Owner</span><p>Operate storefronts, move inventory, and create jobs for others.</p></a>
-          <a href="crime.html" class="story-card" data-stagger><span>Criminal Progression</span><p>Take risks with consequences, investigations, and long-term heat.</p></a>
-          <a href="vsp.html" class="story-card accent-cyan" data-stagger><span>VSP</span><p>Patrol highways, investigate incidents, and protect the wider state.</p></a>
-          <a href="vbso.html" class="story-card accent-gold" data-stagger><span>VBSO</span><p>Serve courts, detention, warrants, and county-level public safety.</p></a>
-          <a href="vems.html" class="story-card accent-red" data-stagger><span>VEMS</span><p>Respond to trauma, rescue calls, transport, and medical scenes.</p></a>
-          <a href="doj.html" class="story-card accent-violet" data-stagger><span>DOJ</span><p>Bring courtroom procedure, due process, and accountability to RP.</p></a>
+
+        <div class="role-cards-grid stagger-story">
+          <!-- Card 1: The Trooper -->
+          <div class="role-card accent-cyan" data-stagger>
+            <div class="role-card-image" style="background-image: url('https://images.unsplash.com/photo-1513828722001-c22db94a07f9?q=80&w=600&auto=format&fit=crop')"></div>
+            <div class="role-card-content">
+              <span class="role-badge">VSP</span>
+              <h3 class="role-title">The Trooper</h3>
+              <p class="role-quote">“Order on the highway. Discipline in the chaos.”</p>
+              <p class="role-desc">Virginia State Police handles statewide patrol, traffic enforcement, speed corridors, and tactical response operations.</p>
+              <a href="vsp.html" class="btn btn-secondary">Explore VSP</a>
+            </div>
+          </div>
+
+          <!-- Card 2: The Deputy -->
+          <div class="role-card accent-gold" data-stagger>
+            <div class="role-card-image" style="background-image: url('https://images.unsplash.com/photo-1617462180803-01362e49cfa3?q=80&w=600&auto=format&fit=crop')"></div>
+            <div class="role-card-content">
+              <span class="role-badge">VBSO</span>
+              <h3 class="role-title">The Deputy</h3>
+              <p class="role-quote">“Serving the courts. Protecting the county.”</p>
+              <p class="role-desc">Sheriff Deputies manage local jail custody operations, courtroom order, warrant service, and community patrol programs.</p>
+              <a href="vbso.html" class="btn btn-secondary">Explore VBSO</a>
+            </div>
+          </div>
+
+          <!-- Card 3: The Medic -->
+          <div class="role-card accent-red" data-stagger>
+            <div class="role-card-image" style="background-image: url('https://images.unsplash.com/photo-1516550893923-42d28e5677af?q=80&w=600&auto=format&fit=crop')"></div>
+            <div class="role-card-content">
+              <span class="role-badge">VEMS</span>
+              <h3 class="role-title">The Medic</h3>
+              <p class="role-quote">“Seconds count when lives are on the line.”</p>
+              <p class="role-desc">Emergency medical crews respond to trauma calls, accidents, fires, and stabilize citizens for transport to clinical care.</p>
+              <a href="vems.html" class="btn btn-secondary">Explore VEMS</a>
+            </div>
+          </div>
+
+          <!-- Card 4: The Attorney -->
+          <div class="role-card accent-violet" data-stagger>
+            <div class="role-card-image" style="background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600&auto=format&fit=crop')"></div>
+            <div class="role-card-content">
+              <span class="role-badge">DOJ</span>
+              <h3 class="role-title">The Attorney</h3>
+              <p class="role-quote">“Justice is balanced. Order is argued.”</p>
+              <p class="role-desc">Public defenders, prosecutors, and judges debate penal codes, manage warrants, and run trials inside the courthouse.</p>
+              <a href="doj.html" class="btn btn-secondary">Explore DOJ</a>
+            </div>
+          </div>
+
+          <!-- Card 5: The Business Owner -->
+          <div class="role-card accent-cyan" data-stagger>
+            <div class="role-card-image" style="background-image: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=600&auto=format&fit=crop')"></div>
+            <div class="role-card-content">
+              <span class="role-badge">LEGAL INDUSTRY</span>
+              <h3 class="role-title">The Owner</h3>
+              <p class="role-quote">“Building commerce. Creating opportunities.”</p>
+              <p class="role-desc">Operate mechanics, legal storefronts, transport logistics, and shape the financial foundation of our economy.</p>
+              <a href="businesses.html" class="btn btn-secondary">Explore Trade</a>
+            </div>
+          </div>
+
+          <!-- Card 6: The Civilian -->
+          <div class="role-card accent-gold" data-stagger>
+            <div class="role-card-image" style="background-image: url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=600&auto=format&fit=crop')"></div>
+            <div class="role-card-content">
+              <span class="role-badge">CITIZEN</span>
+              <h3 class="role-title">The Civilian</h3>
+              <p class="role-quote">“Living life. Driving character progression.”</p>
+              <p class="role-desc">Work legal jobs, trade cars, purchase properties, form unions, and build a unique social history inside Richmond.</p>
+              <a href="jobs.html" class="btn btn-secondary">Explore Jobs</a>
+            </div>
+          </div>
+
+          <!-- Card 7: The Criminal -->
+          <div class="role-card accent-red" data-stagger>
+            <div class="role-card-image" style="background-image: url('https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=600&auto=format&fit=crop')"></div>
+            <div class="role-card-content">
+              <span class="role-badge">UNDERWORLD</span>
+              <h3 class="role-title">The Outlaw</h3>
+              <p class="role-quote">“High risk yields high rewards.”</p>
+              <p class="role-desc">Launder money, trade contraband, rob storefront vaults, but face prosecution and investigative heat from state police.</p>
+              <a href="crime.html" class="btn btn-secondary">Explore Risk</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- CHAPTER 03: Serve the Commonwealth (Sticky Split-Media Section) -->
     <section class="story-chapter has-sticky-media" id="departments" data-chapter="departments">
       <div class="container sticky-story-layout">
         <div class="chapter-content">
           <p class="chapter-kicker reveal-story">Chapter 3 / Serve the Commonwealth</p>
           <h2 class="chapter-title reveal-story">Protect. Respond. <span>Deliver Justice.</span></h2>
-          <p class="chapter-copy reveal-story">Structured public service departments create believable pressure, clear standards, and stories that carry weight.</p>
+          <p class="chapter-copy reveal-story">Structured public service departments create believable pressure, clear operational guidelines, and courtroom stories that carry weight.</p>
           <div class="chapter-actions reveal-story">
-            <a class="btn btn-primary" href="applications.html">Apply</a>
+            <a class="btn btn-primary" href="applications.html">Apply Now</a>
             <a class="btn btn-secondary" href="departments.html">Learn More</a>
           </div>
         </div>
@@ -129,6 +212,7 @@
       </div>
     </section>
 
+    <!-- CHAPTER 04: Build Your Life (Horizontal Scroll Panels) -->
     <section class="story-chapter" id="life" data-chapter="life">
       <div class="chapter-media" data-local-video="assets/video/community-life.mp4">
         <img class="story-image" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1800&auto=format&fit=crop" alt="Modern home representing player housing" loading="lazy">
@@ -150,13 +234,118 @@
       </div>
     </section>
 
+    <!-- CHAPTER 05: Explore the Commonwealth (Virginia Geography Grid) -->
+    <section class="story-chapter explore-commonwealth" id="explore" data-chapter="explore">
+      <div class="chapter-media">
+        <img class="story-image" src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?q=80&w=1800&auto=format&fit=crop" alt="Scenic Virginia highway representing exploration" loading="lazy">
+      </div>
+      <div class="container">
+        <div class="chapter-content chapter-content-wide">
+          <p class="chapter-kicker reveal-story">Chapter 5 / Explore the Commonwealth</p>
+          <h2 class="chapter-title reveal-story">Regions of the <span>Commonwealth.</span></h2>
+          <p class="chapter-copy reveal-story">From urban centers to sandy coastal regions and deep mountain forests, explore different geographic districts.</p>
+        </div>
+        
+        <div class="explore-grid stagger-story">
+          <!-- Card 1: Capital District -->
+          <div class="explore-card" data-stagger onclick="window.location.href='housing.html'">
+            <div class="explore-card-bg" style="background-image: url('https://images.unsplash.com/photo-1541462608141-2f58c6e68ec0?q=80&w=500&auto=format&fit=crop')"></div>
+            <div class="explore-card-content">
+              <span class="explore-label">Richmond</span>
+              <h3 class="explore-name">Capital District</h3>
+              <p class="explore-desc">The heartbeat of commerce, high-density residential properties, and state department operations.</p>
+              <span class="explore-link">Explore Area &rarr;</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Tidewater Coast -->
+          <div class="explore-card" data-stagger onclick="window.location.href='businesses.html'">
+            <div class="explore-card-bg" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=500&auto=format&fit=crop')"></div>
+            <div class="explore-card-content">
+              <span class="explore-label">Virginia Beach</span>
+              <h3 class="explore-name">Tidewater Coast</h3>
+              <p class="explore-desc">Sun-drenched beaches, coastal shipping lanes, import docks, and boardwalk activities.</p>
+              <span class="explore-link">Explore Coast &rarr;</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Blue Ridge Highlands -->
+          <div class="explore-card" data-stagger onclick="window.location.href='jobs.html'">
+            <div class="explore-card-bg" style="background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=500&auto=format&fit=crop')"></div>
+            <div class="explore-card-content">
+              <span class="explore-label">Shenandoah Valley</span>
+              <h3 class="explore-name">Blue Ridge</h3>
+              <p class="explore-desc">Deep forest trails, logging projects, rural cabins, and mountain border dirt routes.</p>
+              <span class="explore-link">Explore Highlands &rarr;</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Suburban Communities -->
+          <div class="explore-card" data-stagger onclick="window.location.href='housing.html'">
+            <div class="explore-card-bg" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=500&auto=format&fit=crop')"></div>
+            <div class="explore-card-content">
+              <span class="explore-label">Henrico County</span>
+              <h3 class="explore-name">Suburban Areas</h3>
+              <p class="explore-desc">Sprawling residential neighborhoods, family homes, garages, and local strip malls.</p>
+              <span class="explore-link">Explore Suburbs &rarr;</span>
+            </div>
+          </div>
+
+          <!-- Card 5: Industrial Corridor -->
+          <div class="explore-card" data-stagger onclick="window.location.href='jobs.html'">
+            <div class="explore-card-bg" style="background-image: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=500&auto=format&fit=crop')"></div>
+            <div class="explore-card-content">
+              <span class="explore-label">Norfolk Yards</span>
+              <h3 class="explore-name">Industrial Zone</h3>
+              <p class="explore-desc">Cargo freight depots, scrap processing, warehouses, and logistics hubs.</p>
+              <span class="explore-link">Explore Industry &rarr;</span>
+            </div>
+          </div>
+
+          <!-- Card 6: Courthouse District -->
+          <div class="explore-card" data-stagger onclick="window.location.href='doj.html'">
+            <div class="explore-card-bg" style="background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=500&auto=format&fit=crop')"></div>
+            <div class="explore-card-content">
+              <span class="explore-label">District Court</span>
+              <h3 class="explore-name">Courthouse</h3>
+              <p class="explore-desc">The legal capital containing prosecutor chambers, defender offices, and trials.</p>
+              <span class="explore-link">Explore Justice &rarr;</span>
+            </div>
+          </div>
+
+          <!-- Card 7: Medical District -->
+          <div class="explore-card" data-stagger onclick="window.location.href='vems.html'">
+            <div class="explore-card-bg" style="background-image: url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=500&auto=format&fit=crop')"></div>
+            <div class="explore-card-content">
+              <span class="explore-label">Richmond Medical</span>
+              <h3 class="explore-name">Medical Center</h3>
+              <p class="explore-desc">The central trauma hospital containing triage bays, treatment labs, and EMS bays.</p>
+              <span class="explore-link">Explore Medical &rarr;</span>
+            </div>
+          </div>
+
+          <!-- Card 8: State Patrol Routes -->
+          <div class="explore-card" data-stagger onclick="window.location.href='vsp.html'">
+            <div class="explore-card-bg" style="background-image: url('https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?q=80&w=500&auto=format&fit=crop')"></div>
+            <div class="explore-card-content">
+              <span class="explore-label">Interstate Corridor</span>
+              <h3 class="explore-name">Highway Routes</h3>
+              <p class="explore-desc">Sprawling tollways, speed trap zones, weight stations, and state police patrol beats.</p>
+              <span class="explore-link">Explore Routes &rarr;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 06: Face Consequences (Consequences & Police Response) -->
     <section class="story-chapter justice-chapter" id="justice" data-chapter="justice">
       <div class="chapter-media" data-local-video="assets/video/richmond-night.mp4">
         <img class="story-image" src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?q=80&w=1800&auto=format&fit=crop" alt="Dark road and night atmosphere" loading="lazy">
       </div>
       <div class="container story-grid">
         <div class="chapter-content">
-          <p class="chapter-kicker reveal-story">Chapter 5 / Face Consequences</p>
+          <p class="chapter-kicker reveal-story">Chapter 6 / Face Consequences</p>
           <h2 class="chapter-title reveal-story">Real Actions. <span>Real Consequences.</span></h2>
           <p class="chapter-copy reveal-story">The best RP has aftermath. Crime, response, treatment, court, custody, records, and dispatch all connect into one living system.</p>
           <div class="consequence-grid stagger-story">
@@ -169,7 +358,7 @@
           </div>
         </div>
         <aside class="cinematic-video-card youtube-card reveal-story" data-youtube-id="UpQv3v4x_EI" data-video-title="4K RVA: Midnight Cityscapes of Richmond, Virginia" data-credit="Placeholder reference. Replace with owned night footage before production.">
-          <button class="youtube-thumb" type="button" aria-label="Play Richmond night cityscape video">
+          <button class="youtube-thumb" type="button" aria-label="Play Richmond night cityscape video" onclick="openTrailerModal('richmondNight')">
             <img src="https://img.youtube.com/vi/UpQv3v4x_EI/sddefault.jpg" alt="Richmond night cityscape video thumbnail" loading="lazy">
             <span class="play-button" aria-hidden="true"></span>
           </button>
@@ -182,13 +371,154 @@
       </div>
     </section>
 
+    <!-- CHAPTER 07: Replay Video Showcases -->
+    <section class="story-chapter video-showcases" id="showcases" data-chapter="showcases">
+      <div class="chapter-media">
+        <img class="story-image" src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1800&auto=format&fit=crop" alt="Cinematic video production equipment" loading="lazy">
+      </div>
+      <div class="container">
+        <div class="chapter-content chapter-content-wide">
+          <p class="chapter-kicker reveal-story">Multmedia Showcases</p>
+          <h2 class="chapter-title reveal-story">Commonwealth <span>Showcase.</span></h2>
+          <p class="chapter-copy reveal-story">Watch footage and replay cinematic moments highlighting our active service departments and economy systems.</p>
+        </div>
+
+        <div class="showcase-grid stagger-story">
+          <!-- Showcase 1: Law Enforcement -->
+          <div class="showcase-card" data-stagger onclick="openTrailerModal('virginiaDrone')">
+            <div class="showcase-thumb" style="background-image: url('https://images.unsplash.com/photo-1513828722001-c22db94a07f9?q=80&w=500&auto=format&fit=crop')">
+              <span class="showcase-play-icon"></span>
+            </div>
+            <div class="showcase-content">
+              <h4 class="showcase-title">Law Enforcement Showcase</h4>
+              <p class="showcase-desc">Showcase Coming Soon &bull; Patrol operations, speed trap checkpoints and VSP pursuits.</p>
+            </div>
+          </div>
+
+          <!-- Showcase 2: EMS Response -->
+          <div class="showcase-card" data-stagger onclick="openTrailerModal('virginiaDrone')">
+            <div class="showcase-thumb" style="background-image: url('https://images.unsplash.com/photo-1516550893923-42d28e5677af?q=80&w=500&auto=format&fit=crop')">
+              <span class="showcase-play-icon"></span>
+            </div>
+            <div class="showcase-content">
+              <h4 class="showcase-title">EMS Response Showcase</h4>
+              <p class="showcase-desc">Showcase Coming Soon &bull; Structural fires, rescue scenes and trauma stabilizer triage.</p>
+            </div>
+          </div>
+
+          <!-- Showcase 3: Civilian Life -->
+          <div class="showcase-card" data-stagger onclick="openTrailerModal('virginiaDrone')">
+            <div class="showcase-thumb" style="background-image: url('https://images.unsplash.com/photo-1506869640319-fe1a24fd76dc?q=80&w=500&auto=format&fit=crop')">
+              <span class="showcase-play-icon"></span>
+            </div>
+            <div class="showcase-content">
+              <h4 class="showcase-title">Civilian Life Showcase</h4>
+              <p class="showcase-desc">Showcase Coming Soon &bull; Trading cars, purchasing apartments and legal labor jobs.</p>
+            </div>
+          </div>
+
+          <!-- Showcase 4: DOJ / Courtroom -->
+          <div class="showcase-card" data-stagger onclick="openTrailerModal('virginiaDrone')">
+            <div class="showcase-thumb" style="background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=500&auto=format&fit=crop')">
+              <span class="showcase-play-icon"></span>
+            </div>
+            <div class="showcase-content">
+              <h4 class="showcase-title">DOJ / Courtroom Showcase</h4>
+              <p class="showcase-desc">Showcase Coming Soon &bull; Attorney dispute debates, judge rulings and warrant filings.</p>
+            </div>
+          </div>
+
+          <!-- Showcase 5: Business / Economy -->
+          <div class="showcase-card" data-stagger onclick="openTrailerModal('virginiaDrone')">
+            <div class="showcase-thumb" style="background-image: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=500&auto=format&fit=crop')">
+              <span class="showcase-play-icon"></span>
+            </div>
+            <div class="showcase-content">
+              <h4 class="showcase-title">Business & Trade Showcase</h4>
+              <p class="showcase-desc">Showcase Coming Soon &bull; Operating custom mechanics, shops and supply logistics.</p>
+            </div>
+          </div>
+
+          <!-- Showcase 6: Crime Consequences -->
+          <div class="showcase-card" data-stagger onclick="openTrailerModal('virginiaDrone')">
+            <div class="showcase-thumb" style="background-image: url('https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=500&auto=format&fit=crop')">
+              <span class="showcase-play-icon"></span>
+            </div>
+            <div class="showcase-content">
+              <h4 class="showcase-title">Crime Consequences Showcase</h4>
+              <p class="showcase-desc">Showcase Coming Soon &bull; Store robberies, police chases and court trials.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 08: Premium Image Gallery (Scenes from the Commonwealth) -->
+    <section class="story-chapter screenshot-gallery" id="gallery" data-chapter="gallery">
+      <div class="chapter-media">
+        <img class="story-image" src="https://images.unsplash.com/photo-1542204172-e7052809a850?q=80&w=1800&auto=format&fit=crop" alt="Cinematic dark cityscape represent gallery background" loading="lazy">
+      </div>
+      <div class="container">
+        <div class="chapter-content chapter-content-wide">
+          <p class="chapter-kicker reveal-story">Chapter 8 / Scenes from the Commonwealth</p>
+          <h2 class="chapter-title reveal-story">Capture the <span>Atmosphere.</span></h2>
+          <p class="chapter-copy reveal-story">Browse screenshot captures highlighting regular life, department units, and scenic horizons inside our server world.</p>
+        </div>
+
+        <div class="gallery-grid stagger-story">
+          <!-- Featured wide item -->
+          <div class="gallery-item wide-feature" data-stagger data-caption="Richmond Skyline - Late Dusk Patrol Routes">
+            <img src="https://images.unsplash.com/photo-1541462608141-2f58c6e68ec0?q=80&w=800&auto=format&fit=crop" alt="Richmond Skyline" loading="lazy">
+            <div class="gallery-item-caption">Richmond Skyline - Late Dusk Patrol Routes</div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="gallery-item" data-stagger data-caption="Virginia State Police Interceptor Patrol Unit">
+            <img src="https://images.unsplash.com/photo-1513828722001-c22db94a07f9?q=80&w=500&auto=format&fit=crop" alt="VSP Interceptor" loading="lazy">
+            <div class="gallery-item-caption">VSP Interceptor Patrol</div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="gallery-item" data-stagger data-caption="Virginia Beach Coastal Cruiser Deployment">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=500&auto=format&fit=crop" alt="Coastal Cruiser" loading="lazy">
+            <div class="gallery-item-caption">Coastal Cruiser Patrol</div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="gallery-item" data-stagger data-caption="Emergency Response Unit Triage Drill">
+            <img src="https://images.unsplash.com/photo-1516550893923-42d28e5677af?q=80&w=500&auto=format&fit=crop" alt="EMS Response Triage" loading="lazy">
+            <div class="gallery-item-caption">EMS Response Drill</div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="gallery-item" data-stagger data-caption="District Courthouse Trials and Legal Order">
+            <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=500&auto=format&fit=crop" alt="District Courthouse" loading="lazy">
+            <div class="gallery-item-caption">Courthouse Legal Trials</div>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="gallery-item" data-stagger data-caption="Richmond Midnight - City streets under amber lamps">
+            <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?q=80&w=500&auto=format&fit=crop" alt="Richmond Midnight Streets" loading="lazy">
+            <div class="gallery-item-caption">Richmond Midnight Streets</div>
+          </div>
+
+          <!-- Item 7 -->
+          <div class="gallery-item" data-stagger data-caption="Blue Ridge logging project zones">
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=500&auto=format&fit=crop" alt="Blue Ridge Logging" loading="lazy">
+            <div class="gallery-item-caption">Blue Ridge Logging</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 09: Current Build Status -->
     <section class="story-chapter status-story" id="status" data-chapter="status">
       <div class="chapter-media">
         <img class="story-image" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=1800&auto=format&fit=crop" alt="Development workspace atmosphere" loading="lazy">
       </div>
       <div class="container story-grid">
         <div class="chapter-content">
-          <p class="chapter-kicker reveal-story">Chapter 6 / Current Build Status</p>
+          <p class="chapter-kicker reveal-story">Chapter 9 / Current Build Status</p>
           <h2 class="chapter-title reveal-story">In Development. <span>Built With Purpose.</span></h2>
           <p class="chapter-copy reveal-story">Commonwealth Legacy RP is currently in private testing. We are showing build transparency, not a fake public population.</p>
           <div class="chapter-actions reveal-story">
@@ -207,18 +537,23 @@
       </div>
     </section>
 
+    <!-- CHAPTER 10: Join the Community (Release CTA Ending) -->
     <section class="story-chapter join-story" id="join" data-chapter="join">
       <div class="chapter-media">
         <img class="story-image" src="https://images.unsplash.com/photo-1506869640319-fe1a24fd76dc?q=80&w=1800&auto=format&fit=crop" alt="Community gathering atmosphere" loading="lazy">
       </div>
       <div class="container">
         <div class="chapter-content chapter-content-wide">
-          <p class="chapter-kicker reveal-story">Chapter 7 / Join the Community</p>
-          <h2 class="chapter-title reveal-story">Your Story <span>Starts Here.</span></h2>
-          <p class="chapter-copy reveal-story">Join the Discord, read the rules, apply when ready, create a character, and step into the Commonwealth with intent.</p>
+          <p class="chapter-kicker reveal-story">Chapter 10 / Start Your Legacy</p>
+          <h2 class="chapter-title reveal-story">YOUR STORY <span>STARTS HERE.</span></h2>
+          <p class="chapter-copy reveal-story">Join our Discord server, review the server etiquette rules, submit your whitelist application, and step into the Commonwealth with purpose.</p>
           <div class="chapter-actions reveal-story">
-            <a class="btn btn-primary" href="https://discord.gg/uPz5cgq4gr" target="_blank" rel="noopener">Join Discord</a>
-            <a class="btn btn-secondary" href="applications.html">View Applications</a>
+            <a class="btn btn-primary btn-shine" href="https://discord.gg/uPz5cgq4gr" target="_blank" rel="noopener">
+              <span class="btn-icon" style="width: 18px; height: 18px; display: inline-flex; align-items: center;">
+                <svg viewBox="0 0 127.14 96.36" fill="currentColor"><path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a77.7,77.7,0,0,0,6.63-10.85,68.43,68.43,0,0,1-10.5-5c.88-.65,1.72-1.34,2.51-2a75.58,75.58,0,0,0,73,0c.8.69,1.63,1.38,2.51,2a68.61,68.61,0,0,1-10.5,5,78.37,78.37,0,0,0,6.63,10.85,105.73,105.73,0,0,0,31.58-18.83C129.24,48.24,123.39,25.43,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.83,46,53.83,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.07,46,96.07,53,91,65.69,84.69,65.69Z"/></svg>
+              </span> Join Discord
+            </a>
+            <a class="btn btn-secondary" href="applications.html">Apply Now</a>
             <a class="btn btn-secondary" href="rules.html">Read Rules</a>
           </div>
         </div>
