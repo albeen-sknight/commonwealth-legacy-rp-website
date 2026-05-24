@@ -3970,14 +3970,147 @@ body.menu-open {
   overflow: hidden;
 }
 
-/* 3. Cinematic Hero Title Reveal Layout */
+/* 3. Cinematic Hero Title Reveal Layout & Scroll Sequence */
+#enter {
+  height: 450vh; /* Scroll distance */
+  position: relative;
+  scroll-margin-top: 0;
+  display: block; /* Don't use grid from .story-chapter */
+}
+
+#enter::before {
+  display: none !important; /* Disable default chapter overlay */
+}
+
+#enter .chapter-media::after {
+  display: none !important; /* Disable default media overlay */
+}
+
+#enter.chapter-active .story-video,
+#enter.chapter-active .story-image {
+  /* Let JS handle the scaling transform */
+  transform: none;
+}
+
+.sticky-hero-wrapper {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  background-color: #0A0D11;
+}
+
+.hero-dark-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(10, 13, 17, 0.4) 0%, rgba(10, 13, 17, 0.95) 80%), #0A0D11;
+  opacity: 0.95;
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 0.1s linear;
+}
+
+.hero-stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  z-index: 2;
+  transition: opacity 0.1s linear, transform 0.1s linear;
+  text-align: center;
+  padding: 2rem;
+}
+
+/* Enable clicks/hovers only when a stage is active */
+.hero-stage.stage-active {
+  pointer-events: auto;
+}
+
+/* Stage-specific styling */
+.dramatic-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 8.5vw, 8.5rem);
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: var(--white);
+  text-transform: uppercase;
+  margin: 0;
+  text-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+}
+
+.logo-wordmark-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-wordmark-main {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 5vw, 5vw);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: var(--white);
+  text-transform: uppercase;
+}
+
+.logo-wordmark-sub {
+  font-family: var(--font-body);
+  font-size: clamp(0.8rem, 1.8vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  color: var(--cyan);
+  text-transform: uppercase;
+  margin-top: 0.75rem;
+}
+
+.logo-wordmark-motto {
+  font-family: var(--font-body);
+  font-size: clamp(0.7rem, 1.3vw, 1.1rem);
+  font-weight: 500;
+  letter-spacing: 0.4em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-top: 1.2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 0.8rem;
+  width: 100%;
+  max-width: 300px;
+}
+
+.release-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 4vw);
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: var(--white);
+  text-transform: uppercase;
+  margin: 0;
+  text-shadow: 0 0 30px rgba(0, 229, 255, 0.2);
+}
+
+/* Stage 4 Final Hero styling overrides to match general hero design */
+.stage-final-hero {
+  /* Layout details similar to original hero layout */
+  background: transparent;
+}
+
 .hero-story-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding-top: 4rem;
+  width: 100%;
   position: relative;
   z-index: 2;
   text-align: center;
@@ -3989,6 +4122,7 @@ body.menu-open {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
 .hero-status-badge {
@@ -4018,6 +4152,7 @@ body.menu-open {
   letter-spacing: 0.05em;
   color: var(--white);
   font-weight: 900;
+  text-transform: uppercase;
 }
 
 .hero-logo-highlight {
@@ -4026,6 +4161,7 @@ body.menu-open {
   color: var(--cyan);
   text-shadow: 0 0 30px rgba(0, 229, 255, 0.25);
   font-weight: 900;
+  text-transform: uppercase;
 }
 
 .hero-logo-sub {
@@ -4046,7 +4182,7 @@ body.menu-open {
   letter-spacing: 0.4em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 3.5rem;
+  margin-bottom: 2.5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding-bottom: 1rem;
 }
@@ -4057,6 +4193,9 @@ body.menu-open {
   color: var(--white);
   margin-bottom: 2.5rem;
   text-wrap: balance;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.02em;
 }
 
 .hero-headline span {
@@ -4072,7 +4211,7 @@ body.menu-open {
 
 .scroll-more-indicator {
   position: absolute;
-  bottom: 2rem;
+  bottom: 2.5rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -4084,6 +4223,7 @@ body.menu-open {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   font-weight: 700;
+  z-index: 3;
 }
 
 .scroll-arrow {
@@ -4110,17 +4250,36 @@ body.menu-open {
   70%, 100% { transform: translateY(200%); }
 }
 
-/* Stagger reveals on hero load */
-.reveal-hero-item {
-  opacity: 0;
-  transform: translateY(25px);
+/* Reduced Motion Override for Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  #enter {
+    height: auto !important;
+    min-height: 100vh;
+    display: grid !important;
+  }
+  .sticky-hero-wrapper {
+    position: relative !important;
+    height: auto !important;
+    min-height: 100vh;
+  }
+  .hero-stage {
+    display: none !important;
+  }
+  .hero-stage.stage-final-hero {
+    display: flex !important;
+    position: relative !important;
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: auto !important;
+  }
+  .hero-dark-overlay {
+    opacity: 0.55 !important;
+  }
+  #enter.chapter-active .story-video,
+  #enter.chapter-active .story-image {
+    transform: scale(1.0) !important;
+  }
 }
-
-.chapter-active .reveal-hero-item:nth-child(1) { animation: slideUpIn 0.8s 0.2s forwards; }
-.chapter-active .reveal-hero-item:nth-child(2) { animation: slideUpIn 0.8s 0.4s forwards; }
-.chapter-active .reveal-hero-item:nth-child(3) { animation: slideUpIn 0.8s 0.6s forwards; }
-.chapter-active .reveal-hero-item:nth-child(4) { animation: slideUpIn 0.8s 0.8s forwards; }
-.chapter-active .reveal-hero-item:nth-child(5) { animation: slideUpIn 0.8s 1.0s forwards; }
 
 /* 4. Large Cinematic Role Profile Cards Grid */
 .role-cards-grid {
