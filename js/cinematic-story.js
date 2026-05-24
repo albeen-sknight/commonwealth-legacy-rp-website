@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initChapterObserver(chapters, chapterLinks);
   initStoryReveals(reduceMotion);
   initHeroScrollSequence(reduceMotion);
+  initCharacterFrameScroll(reduceMotion);
 });
 
 function initChapterObserver(chapters, chapterLinks) {
@@ -276,3 +277,84 @@ function initHeroScrollSequence(reduceMotion) {
   window.addEventListener('scroll', onScroll, { passive: true });
   updateScroll();
 }
+
+/**
+ * Implements a scroll-scrubbed character frame sequence.
+ * Toggles the visibility of character frames and captions based on scroll position.
+ */
+function initCharacterFrameScroll(reduceMotion) {
+  const section = document.getElementById('legacy-frame-scroll');
+  if (!section) return;
+
+  const frames = Array.from(section.querySelectorAll('.character-frame'));
+  const stages = Array.from(section.querySelectorAll('.frame-stage-copy'));
+  const totalFrames = frames.length;
+
+  function updateFrameScroll() {
+    const isMobile = window.innerWidth <= 768;
+    if (reduceMotion || isMobile) {
+      // In reduced motion or mobile, make the final frame/caption active statically
+      frames.forEach((f, idx) => {
+        f.classList.toggle('is-active', idx === totalFrames - 1);
+      });
+      stages.forEach((s, idx) => {
+        s.classList.toggle('is-active', idx === totalFrames - 1);
+      });
+      const stack = section.querySelector('.character-frame-stack');
+      if (stack) stack.style.transform = '';
+      return;
+    }
+
+    const rect = section.getBoundingClientRect();
+    const sectionHeight = section.offsetHeight;
+    const windowHeight = window.innerHeight;
+
+    // Calculate how far down we have scrolled into the section's scrollable range
+    const scrollableRange = sectionHeight - windowHeight;
+    if (scrollableRange <= 0) return;
+
+    const scrolled = -rect.top;
+    let progress = scrolled / scrollableRange;
+    progress = Math.max(0, Math.min(1, progress));
+
+    // Determine current active index based on progress segments
+    const frameIndex = Math.min(totalFrames - 1, Math.floor(progress * totalFrames));
+
+    // Update active frame state
+    frames.forEach((f, idx) => {
+      f.classList.toggle('is-active', idx === frameIndex);
+    });
+
+    // Apply scale parallax zoom to the stack
+    const stack = section.querySelector('.character-frame-stack');
+    if (stack) {
+      const currentScale = 1.0 + 0.04 * progress;
+      stack.style.transform = `scale(${currentScale})`;
+    }
+
+    // Update active text caption
+    stages.forEach((s, idx) => {
+      s.classList.toggle('is-active', idx === frameIndex);
+    });
+  }
+
+  let ticking = false;
+  const onScroll = () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        updateFrameScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', () => {
+    onScroll();
+  }, { passive: true });
+
+  // Run initial calculation
+  updateFrameScroll();
+}
+

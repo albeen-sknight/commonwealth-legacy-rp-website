@@ -5,32 +5,7 @@
 
 // Vector SVG Library (Commonwealth Beacon, Department Crests, UI elements)
 const SVGIcons = {
-  beacon: `<svg class="logo-beacon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="6 3" />
-    <circle cx="50" cy="50" r="36" fill="none" stroke="currentColor" stroke-width="1" />
-    <circle cx="50" cy="50" r="33" fill="none" stroke="currentColor" stroke-width="1.5" />
-    <polygon points="50,6 46,16 54,16" fill="currentColor" />
-    <polygon points="50,94 46,84 54,84" fill="currentColor" />
-    <polygon points="94,50 84,46 84,54" fill="currentColor" />
-    <polygon points="6,50 16,46 16,54" fill="currentColor" />
-    <polygon points="50,50 81,19 78,25 73,22" fill="currentColor" opacity="0.7" />
-    <polygon points="50,50 81,81 73,78 76,73" fill="currentColor" opacity="0.7" />
-    <polygon points="50,50 19,81 22,73 27,76" fill="currentColor" opacity="0.7" />
-    <polygon points="50,50 19,19 27,22 24,27" fill="currentColor" opacity="0.7" />
-    <circle cx="50" cy="50" r="26" fill="var(--bg)" stroke="currentColor" stroke-width="2" />
-    <rect x="36" y="58" width="28" height="3" fill="currentColor" />
-    <rect x="38" y="55" width="24" height="3" fill="currentColor" />
-    <rect x="41" y="47" width="2" height="8" fill="currentColor" />
-    <rect x="45" y="47" width="2" height="8" fill="currentColor" />
-    <rect x="49" y="47" width="2" height="8" fill="currentColor" />
-    <rect x="53" y="47" width="2" height="8" fill="currentColor" />
-    <rect x="57" y="47" width="2" height="8" fill="currentColor" />
-    <path d="M40 47 C40 37, 60 37, 60 47 Z" fill="currentColor" />
-    <rect x="48" y="32" width="4" height="6" fill="currentColor" />
-    <polygon points="50,26 47,32 53,32" fill="currentColor" />
-    <line x1="50" y1="26" x2="50" y2="20" stroke="currentColor" stroke-width="1" />
-    <polygon points="50,20 54,22 50,24" fill="currentColor" />
-  </svg>`,
+  beacon: `<img src="assets/img/brand/logo_v.png" class="logo-image-brand" alt="CLRP Logo" style="display: block; width: 100%; height: 100%; object-fit: contain;">`,
   
   vsp: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
     <path d="M50 5 L85 20 V55 C85 75 50 95 50 95 C50 95 15 75 15 55 V20 L50 5 Z" fill="none" stroke="currentColor" stroke-width="4"/>
